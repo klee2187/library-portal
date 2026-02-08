@@ -20,6 +20,7 @@ const getSingle = async (req, res) => {
 };
 
 const addUser = async (req, res) => {
+    console.log("BODY:", req.body);
     const newUser = {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
