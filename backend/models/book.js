@@ -1,11 +1,11 @@
 import mongoose from 'mongoose';
 
-const seriesInfoSchema = new mongoose.Schmema({
+const seriesInfoSchema = new mongoose.Schema({
     series: { type: String},
     bookNumber: { type: Number}
 }, { _id: false });
 
-const bookSchema = new mongoose.Schmema({
+const bookSchema = new mongoose.Schema({
     title: { type: String, required: true },
     author: { type: String, requried: true},
     genre: { type: String, required: true},
