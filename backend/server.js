@@ -1,3 +1,5 @@
+console.log("SERVER STARTED");
+
 const express = require('express');
 const mongodb = require('./db/connect');
 
