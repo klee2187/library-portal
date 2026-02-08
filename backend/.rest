@@ -10,3 +10,20 @@ GET http://localhost:8080/books/6987e5fd810d6a8bbfaa8bf6
 ###
 GET http://localhost:8080/users/6987e60d810d6a8bbfaa8bfe
 
+###
+GET https://library-portal-3dzg.onrender.com/books
+
+###
+GET https://library-portal-3dzg.onrender.com/users
+
+###
+GET https://library-portal-3dzg.onrender.com/books/6987e5fd810d6a8bbfaa8bf6
+
+###
+GET https://library-portal-3dzg.onrender.com/users/6987e60d810d6a8bbfaa8bfe
+
+###
+POST http://localhost:8080/books
+
+###
+POST http://localhost:8080/users
