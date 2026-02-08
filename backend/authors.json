@@ -1,0 +1,45 @@
+[
+    {
+      "name": "Sarah M. Eden",
+      "otherWorks": [
+        "Courting Miss Lancaster",
+        "The Kiss of a Stranger",
+        "Longing for Home"
+      ],
+      "about": "Sarah M. Eden is a bestselling author known for her heartfelt Regency romances and richly developed characters. Her work blends historical detail with emotional depth, creating stories that explore love, healing, and the quiet strength found in everyday courage."
+    },
+    {
+      "name": "Rick Riordan",
+      "otherWorks": [
+        "The Heroes of Olympus",
+        "The Kane Chronicles",
+        "Magnus Chase and the Gods of Asgard"
+      ],
+      "about": "Rick Riordan is a bestselling author known for blending modern adventure with ancient mythology. His fast‑paced stories, witty characters, and imaginative worldbuilding have made him a favorite among young readers and sparked a renewed interest in mythological storytelling."
+    },
+    {
+      "name": "Tui T. Sutherland",
+      "otherWorks": ["Wings of Fire: The Dragonet Prophecy", "Wings of Fire: The Dark Secret"],
+      "about": "Tui T. Sutherland is a prolific fantasy author best known for her imaginative worldbuilding and character‑driven storytelling in the Wings of Fire series. Her work blends adventure, mystery, and emotional depth, making it a favorite among young readers."
+    },
+    {
+      "name": "Alexandre Dumas",
+      "otherWorks": ["The Three Musketeers", "Twenty Years After"],
+      "about": "Alexandre Dumas was a celebrated French novelist and playwright whose sweeping adventures and dramatic storytelling helped define the literary landscape of the 19th century. His works are known for their rich characters, intricate plots, and timeless themes of justice and honor."
+    },
+    {
+      "name": "S. E. Hinton",
+      "otherWorks": ["Rumble Fish", "That Was Then, This Is Now"],
+      "about": "S. E. Hinton is a groundbreaking author whose honest, emotionally raw portrayals of teenage life reshaped young adult literature. Her stories explore identity, loyalty, and the struggles of adolescence with clarity and compassion."
+    },
+    {
+      "name": "Mary Shelley",
+      "otherWorks": ["The Last Man", "Valperga"],
+      "about": "Mary Shelley was an influential English novelist whose visionary storytelling helped shape both Gothic literature and early science fiction. Her work often explores ambition, humanity, and the consequences of pushing beyond moral and natural boundaries."
+    },
+    {
+      "name": "Neil Gaiman",
+      "otherWorks": ["The Graveyard Book", "Stardust"],
+      "about": "Neil Gaiman is an award‑winning author known for his imaginative blend of fantasy, folklore, and dark whimsy. His stories often explore the thin line between the ordinary and the magical, creating worlds that feel both haunting and deeply human."
+    }
+]

@@ -1,0 +1,82 @@
+[
+  {
+    "firstName": "Ava",
+    "lastName": "Henderson",
+    "age": 29,
+    "email": "ava.henderson@example.com",
+    "phoneNum": "385-555-1023",
+    "address": "742 Maple Ridge Dr, Tooele, UT"
+  },
+  {
+    "firstName": "Marcus",
+    "lastName": "Ellington",
+    "age": 34,
+    "email": "marcus.ellington@example.com",
+    "phoneNum": "801-555-4478",
+    "address": "19 Westbrook Ave, Salt Lake City, UT"
+  },
+  {
+    "firstName": "Sophie",
+    "lastName": "Kim",
+    "age": 22,
+    "email": "sophie.kim@example.com",
+    "phoneNum": "435-555-9834",
+    "address": "120 Cedar Hollow Ln, Logan, UT"
+  },
+  {
+    "firstName": "Daniel",
+    "lastName": "Morales",
+    "age": 41,
+    "email": "daniel.morales@example.com",
+    "phoneNum": "385-555-6612",
+    "address": "88 Canyon Crest Rd, Provo, UT"
+  },
+  {
+    "firstName": "Lily",
+    "lastName": "Sanders",
+    "age": 27,
+    "email": "lily.sanders@example.com",
+    "phoneNum": "801-555-2249",
+    "address": "503 Willow Bend St, Ogden, UT"
+  },
+  {
+    "firstName": "Ethan",
+    "lastName": "Bradshaw",
+    "age": 31,
+    "email": "ethan.bradshaw@example.com",
+    "phoneNum": "435-555-7701",
+    "address": "14 Aspen Meadow Ct, St. George, UT"
+  },
+  {
+    "firstName": "Natalie",
+    "lastName": "Reeves",
+    "age": 25,
+    "email": "natalie.reeves@example.com",
+    "phoneNum": "385-555-5520",
+    "address": "230 Orchard View Dr, Layton, UT"
+  },
+  {
+    "firstName": "Owen",
+    "lastName": "Carpenter",
+    "age": 38,
+    "email": "owen.carpenter@example.com",
+    "phoneNum": "801-555-9034",
+    "address": "67 Pinecrest Loop, Sandy, UT"
+  },
+  {
+    "firstName": "Jasmine",
+    "lastName": "Lopez",
+    "age": 30,
+    "email": "jasmine.lopez@example.com",
+    "phoneNum": "435-555-1189",
+    "address": "412 Brookside Way, Cedar City, UT"
+  },
+  {
+    "firstName": "Henry",
+    "lastName": "Dalton",
+    "age": 45,
+    "email": "henry.dalton@example.com",
+    "phoneNum": "385-555-6402",
+    "address": "9 Summit Ridge Pl, Draper, UT"
+  }
+]

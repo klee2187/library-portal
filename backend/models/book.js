@@ -1,0 +1,23 @@
+import mongoose from 'mongoose';
+
+const seriesInfoSchema = new mongoose.Schmema({
+    series: { type: String},
+    bookNumber: { type: Number}
+}, { _id: false });
+
+const bookSchema = new mongoose.Schmema({
+    title: { type: String, required: true },
+    author: { type: String, requried: true},
+    genre: { type: String, required: true},
+    year: { type: Number, required: true },
+    publishedBy: { type: String, required: true },
+    ageGroup: { type: String, required: true },
+    themes: { type: [String], default: [] },
+    setting: { type: String },
+    seriesInfo: {
+        type: seriesInfoSchema,
+        default: null
+    }
+});
+
+export default mongoose.model('book', bookSchema);

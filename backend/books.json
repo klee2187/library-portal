@@ -1,0 +1,149 @@
+[
+    {
+      "title": "Seeking Persephone",
+      "author": "Sarah M. Eden",
+      "genre": "Regency Romance",
+      "year": 2008,
+      "publishedBy": "Covenant Communications",
+      "description": "A thoughtful and emotionally rich Regency romance about a reclusive duke who enters a marriage of convenience with a spirited young woman, only to discover that trust, healing, and love require far more courage than either expected.",
+      "ageGroup": "Adult",
+      "themes": [
+        "marriage of convenience",
+        "healing from trauma",
+        "slow-burn romance",
+        "family loyalty",
+        "personal growth"
+      ],
+      "setting": "Early 19th-century England",
+      "seriesInfo": {
+        "series": "The Lancaster Family",
+        "bookNumber": 1
+      }
+    },
+    {
+      "title": "Percy Jackson and the Olympians",
+      "author": "Rick Riordan",
+      "genre": "Fantasy / Mythology Adventure",
+      "year": 2005,
+      "publishedBy": "Disney-Hyperion",
+      "description": "A fast-paced, modern fantasy series following Percy Jackson, a twelve-year-old who discovers he is the son of a Greek god and is thrust into a world of monsters, quests, and ancient prophecies that challenge his courage and identity.",
+      "ageGroup": "Middle Grade / Teen",
+      "themes": [
+        "heroism",
+        "friendship",
+        "identity",
+        "Greek mythology",
+        "courage under pressure"
+      ],
+      "setting": "Modern-day United States blended with locations from Greek mythology",
+      "seriesInfo": {
+        "series": "Percy Jackson and the Olympians",
+        "bookNumber": 1
+      }
+    },
+    {
+      "title": "Wings of Fire: The Hidden Kingdom",
+      "author": "Tui T. Sutherland",
+      "genre": "Fantasy / Middle Grade Adventure",
+      "year": 2013,
+      "publishedBy": "Scholastic Press",
+      "description": "The third installment in the Wings of Fire series follows Glory as she journeys into the mysterious RainWing kingdom, uncovering secrets, missing dragons, and a dangerous threat that challenges her courage and leadership.",
+      "ageGroup": "Middle Grade / Teen",
+      "themes": [
+        "identity",
+        "leadership",
+        "friendship",
+        "courage",
+        "mystery"
+      ],
+      "setting": "The RainWing Kingdom and surrounding jungles of Pyrrhia",
+      "seriesInfo": {
+        "series": "Wings of Fire",
+        "bookNumber": 3
+      }
+    },
+    {
+      "title": "The Count of Monte Cristo",
+      "author": "Alexandre Dumas",
+      "genre": "Classic Adventure / Historical Fiction",
+      "year": 1844,
+      "publishedBy": "Pierre-Jules Hetzel (original serialization)",
+      "description": "A sweeping tale of betrayal, survival, and calculated revenge, following Edmond Dantès as he transforms from a wrongfully imprisoned sailor into the enigmatic Count of Monte Cristo, determined to reshape the fates of those who wronged him.",
+      "ageGroup": "Adult",
+      "themes": [
+        "justice vs. revenge",
+        "identity",
+        "betrayal",
+        "redemption",
+        "fate and consequence"
+      ],
+      "setting": "France, Italy, and the Mediterranean during the early 19th century",
+      "seriesInfo": {
+        "series": "Standalone Classic",
+        "bookNumber": 1
+      }
+    },
+    {
+      "title": "The Outsiders",
+      "author": "S. E. Hinton",
+      "genre": "Young Adult Fiction",
+      "year": 1967,
+      "publishedBy": "Viking Press",
+      "description": "A powerful coming‑of‑age story that follows Ponyboy Curtis as he navigates loyalty, identity, and the harsh realities of class conflict between the Greasers and the Socs.",
+      "ageGroup": "Teen",
+      "themes": [
+        "identity",
+        "class conflict",
+        "brotherhood",
+        "loyalty",
+        "coming of age"
+      ],
+      "setting": "A mid‑1960s American town marked by sharp social divides",
+      "seriesInfo": {
+        "series": "Standalone Novel",
+        "bookNumber": 1
+      }
+    },
+    {
+      "title": "Frankenstein",
+      "author": "Mary Shelley",
+      "genre": "Gothic Horror / Science Fiction",
+      "year": 1818,
+      "publishedBy": "Lackington, Hughes, Harding, Mavor & Jones",
+      "description": "A haunting tale of ambition and consequence, following Victor Frankenstein as he creates a living being from assembled parts, only to face the devastating fallout of abandoning the creature he brought into the world.",
+      "ageGroup": "Adult",
+      "themes": [
+        "creation and responsibility",
+        "isolation",
+        "ambition",
+        "identity",
+        "the nature of humanity"
+      ],
+      "setting": "Europe in the late 18th century, spanning Switzerland, Germany, Scotland, and the Arctic",
+      "seriesInfo": {
+        "series": "Standalone Classic",
+        "bookNumber": 1
+      }
+    },
+    {
+      "title": "Coraline",
+      "author": "Neil Gaiman",
+      "genre": "Dark Fantasy / Children’s Horror",
+      "year": 2002,
+      "publishedBy": "HarperCollins",
+      "description": "A curious young girl discovers a hidden doorway to an eerie parallel world where everything seems perfect—until she realizes the sinister truth behind the Other Mother’s intentions.",
+      "ageGroup": "Children / Middle Grade",
+      "themes": [
+        "bravery",
+        "identity",
+        "family",
+        "temptation",
+        "facing fears"
+      ],
+      "setting": "A modern-day apartment building and its unsettling mirror-world counterpart",
+      "seriesInfo": {
+        "series": "Standalone Novel",
+        "bookNumber": 1
+      }
+    }
+]
