@@ -1,10 +1,5 @@
-console.log("SERVER STARTED");
-
 const express = require('express');
 const mongodb = require('./db/connect');
-
-const booksRoutes = require('./routes/books');
-const usersRoutes = require('./routes/users');
 const routes = require('./routes');
 
 const port = process.env.PORT || 8080;
@@ -17,8 +12,6 @@ app
     res.setHeader('Access-Control-Allow-Origin', '*');
     next();
   })
-  .use('/books', booksRoutes)
-  .use('/users', usersRoutes)
   .use('/', routes);
 
 app.get('/', (req, res) => {
