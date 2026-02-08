@@ -7,20 +7,14 @@
   },
   "host": "library-portal-3dzg.onrender.com",
   "basePath": "/",
-  "schemes": [
-    "https"
-  ],
+  "schemes": ["https"],
   "paths": {
-    "/": {
+    "/users": {
       "get": {
         "description": "",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "responses": {
-          "200": {
-            "description": "OK"
-          }
+          "200": { "description": "OK" }
         }
       },
       "post": {
@@ -32,111 +26,139 @@
             "schema": {
               "type": "object",
               "properties": {
-                "firstName": {
-                  "example": "any"
-                },
-                "lastName": {
-                  "example": "any"
-                },
-                "age": {
-                  "example": "any"
-                },
-                "email": {
-                  "example": "any"
-                },
-                "phoneNum": {
-                  "example": "any"
-                },
-                "address": {
-                  "example": "any"
-                }
+                "firstName": { "example": "any" },
+                "lastName": { "example": "any" },
+                "age": { "example": "any" },
+                "email": { "example": "any" },
+                "phoneNum": { "example": "any" },
+                "address": { "example": "any" }
               }
             }
           }
         ],
         "responses": {
-          "201": {
-            "description": "Created"
-          }
+          "201": { "description": "Created" }
         }
       }
     },
-    "/{id}": {
+
+    "/users/{id}": {
       "get": {
         "description": "",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
+          { "name": "id", "in": "path", "required": true, "type": "string" }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          }
+          "200": { "description": "OK" }
         }
       },
       "put": {
         "description": "",
         "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
+          { "name": "id", "in": "path", "required": true, "type": "string" },
           {
             "name": "body",
             "in": "body",
             "schema": {
               "type": "object",
               "properties": {
-                "firstName": {
-                  "example": "any"
-                },
-                "lastName": {
-                  "example": "any"
-                },
-                "age": {
-                  "example": "any"
-                },
-                "email": {
-                  "example": "any"
-                },
-                "phoneNum": {
-                  "example": "any"
-                },
-                "address": {
-                  "example": "any"
-                }
+                "firstName": { "example": "any" },
+                "lastName": { "example": "any" },
+                "age": { "example": "any" },
+                "email": { "example": "any" },
+                "phoneNum": { "example": "any" },
+                "address": { "example": "any" }
               }
             }
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
-          }
+          "204": { "description": "No Content" }
         }
       },
       "delete": {
         "description": "",
         "parameters": [
+          { "name": "id", "in": "path", "required": true, "type": "string" }
+        ],
+        "responses": {
+          "204": { "description": "No Content" }
+        }
+      }
+    },
+
+    "/books": {
+      "get": {
+        "description": "Get all books",
+        "responses": {
+          "200": { "description": "OK" }
+        }
+      },
+      "post": {
+        "description": "Add a new book",
+        "parameters": [
           {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "name": "body",
+            "in": "body",
+            "schema": { "$ref": "#/definitions/Book" }
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
+          "201": { "description": "Created" }
+        }
+      }
+    },
+
+    "/books/{id}": {
+      "get": {
+        "description": "Get a single book",
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "type": "string" }
+        ],
+        "responses": {
+          "200": { "description": "OK" }
+        }
+      },
+      "put": {
+        "description": "Update a book",
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "type": "string" },
+          { "name": "body", "in": "body", "schema": { "$ref": "#/definitions/Book" } }
+        ],
+        "responses": {
+          "204": { "description": "No Content" }
+        }
+      },
+      "delete": {
+        "description": "Delete a book",
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "type": "string" }
+        ],
+        "responses": {
+          "204": { "description": "No Content" }
+        }
+      }
+    }
+  },
+
+  "definitions": {
+    "Book": {
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "author": { "type": "string" },
+        "genre": { "type": "string" },
+        "year": { "type": "integer" },
+        "publishedBy": { "type": "string" },
+        "ageGroup": { "type": "string" },
+        "themes": { "type": "array", "items": { "type": "string" } },
+        "setting": { "type": "string" },
+        "seriesInfo": {
+          "type": "object",
+          "properties": {
+            "series": { "type": "string" },
+            "bookNumber": { "type": "integer" }
           }
         }
       }
