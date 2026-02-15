@@ -14,7 +14,8 @@
         "description": "",
         "produces": ["application/json"],
         "responses": {
-          "200": { "description": "OK" }
+          "200": { "description": "No users found" },
+          "500": { "description": "Database connection not established" }
         }
       },
       "post": {
@@ -37,7 +38,8 @@
           }
         ],
         "responses": {
-          "201": { "description": "Created" }
+          "201": { "description": "User created successfully" },
+          "500": { "description": "Failed to add user" }
         }
       }
     },
@@ -47,16 +49,28 @@
         "description": "",
         "produces": ["application/json"],
         "parameters": [
-          { "name": "id", "in": "path", "required": true, "type": "string" }
+          { 
+            "name": "id", 
+            "in": "path", 
+            "required": true, 
+            "type": "string" 
+          }
         ],
         "responses": {
-          "200": { "description": "OK" }
+          "200": { "description": "User not found" },
+          "400": { "description": "Invalid user ID" },
+          "500": { "description": "Database connection not established" }
+
         }
       },
       "put": {
         "description": "",
         "parameters": [
-          { "name": "id", "in": "path", "required": true, "type": "string" },
+          { 
+            "name": "id", 
+            "in": "path", 
+            "required": true, 
+            "type": "string" },
           {
             "name": "body",
             "in": "body",
@@ -74,16 +88,27 @@
           }
         ],
         "responses": {
-          "204": { "description": "No Content" }
+          "204": { "description": "User updated successfully" },
+          "400": { "description": "Invalid user ID" },
+          "404": { "description": "User not Found" },
+          "500": { "description": "Failed to update user" }
         }
       },
       "delete": {
         "description": "",
         "parameters": [
-          { "name": "id", "in": "path", "required": true, "type": "string" }
+          { 
+            "name": "id", 
+            "in": "path", 
+            "required": true, 
+            "type": "string" 
+          }
         ],
         "responses": {
-          "204": { "description": "No Content" }
+          "204": { "description": "User deleted successfully" },
+          "400": { "description": "Invalid user ID" },
+          "404": { "description": "User not Found" },
+          "500": { "description": "Failed to delete user" }
         }
       }
     },
@@ -92,7 +117,9 @@
       "get": {
         "description": "Get all books",
         "responses": {
-          "200": { "description": "OK" }
+          "200": { "description": "No books found" },
+          "500": { "description": "Database connection not established" }
+
         }
       },
       "post": {
@@ -105,7 +132,9 @@
           }
         ],
         "responses": {
-          "201": { "description": "Created" }
+          "201": { "description": "Book created successfully" },
+          "500": { "description": "Failed to add book" }
+
         }
       }
     },
@@ -114,29 +143,60 @@
       "get": {
         "description": "Get a single book",
         "parameters": [
-          { "name": "id", "in": "path", "required": true, "type": "string" }
+          { 
+            "name": "id", 
+            "in": "path", 
+            "required": true, 
+            "type": "string" 
+          }
         ],
         "responses": {
-          "200": { "description": "OK" }
+          "200": { "description": "Book not found" },
+          "400": { "description": "Invalid book ID" },
+          "500": { "description": "Database connection not established" }
         }
       },
       "put": {
         "description": "Update a book",
         "parameters": [
-          { "name": "id", "in": "path", "required": true, "type": "string" },
-          { "name": "body", "in": "body", "schema": { "$ref": "#/definitions/Book" } }
+          { 
+            "name": "id", 
+            "in": "path", 
+            "required": true, 
+            "schema": { "type": "string" }
+          }
         ],
+        "requestBody": {
+           "description": "Book object that needs to be updated",
+           "required": true,
+           "content": {
+             "application/json": {
+              "schema": { "$ref": "#/definitions/Book" } 
+            }
+          }
+        },
         "responses": {
-          "204": { "description": "No Content" }
+          "204": { "description": "Book updated successfully" },
+          "400" : { "description": "Invalid book ID" },
+          "404" : { "description": "Book not found" },
+          "500": { "description": "Failed to update book" } 
         }
       },
       "delete": {
         "description": "Delete a book",
         "parameters": [
-          { "name": "id", "in": "path", "required": true, "type": "string" }
+          { 
+          "name": "id", 
+          "in": "path", 
+          "required": true, 
+          "schema": { "type": "string" }
+          }
         ],
         "responses": {
-          "204": { "description": "No Content" }
+          "204": { "description": "Book deleted successfully" },
+          "400" : { "description": "Invalid book ID" },
+          "404" : { "description": "Book not found" },
+          "500": { "description": "Failed to delete book" }
         }
       }
     }

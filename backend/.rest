@@ -1,4 +1,7 @@
 ###
+GET https://library-portal-3dzg.onrender.com/api-docs
+
+###
 GET http://localhost:8080/books
 
 ###
@@ -7,11 +10,34 @@ GET http://localhost:8080/users
 ###
 GET http://localhost:8080/books/6987e5fd810d6a8bbfaa8bf6
 
+title: "Seeking Persephone"
+author: "Sarah M. Eden" 
+genre: "Regency Romance"
+year: 2008
+publishedBy: "Covenant Communications"
+description: "A thoughtful and emotionally rich Regency romance about a reclusive du…"
+ageGroup: "Adult"
+themes: Array (5)
+    0: "marriage of convenience"
+    1: "healing from trauma"
+    2: "slow-burn romance"
+    3: "family loyalty"
+    4: "personal growth"
+setting: "Early 19th-century England"
+seriesInfo: Object
+    series: "The Lancaster Family"
+    bookNumber: 1
+
 ###
 GET http://localhost:8080/users/6987e60d810d6a8bbfaa8bfe
 
-###
-GET https://library-portal-3dzg.onrender.com/api-docs
+
+firstName: "Ava"
+lastName: "Henderson"
+age: 29
+email:  "ava.henderson@example.com"
+phoneNum: "385-555-1023"
+address: "742 Maple Ridge Dr, Tooele, UT"
 
 ###
 GET https://library-portal-3dzg.onrender.com/books
@@ -20,10 +46,35 @@ GET https://library-portal-3dzg.onrender.com/books
 GET https://library-portal-3dzg.onrender.com/users
 
 ###
-GET https://library-portal-3dzg.onrender.com/books/6987e5fd810d6a8bbfaa8bf6
+GET https://library-portal-3dzg.onrender.com/books/
+
+title: "Seeking Persephone"
+author: "Sarah M. Eden" 
+genre: "Regency Romance"
+year: 2008
+publishedBy: "Covenant Communications"
+description: "A thoughtful and emotionally rich Regency romance about a reclusive du…"
+ageGroup: "Adult"
+themes: Array (5)
+    0: "marriage of convenience"
+    1: "healing from trauma"
+    2: "slow-burn romance"
+    3: "family loyalty"
+    4: "personal growth"
+setting: "Early 19th-century England"
+seriesInfo: Object
+    series: "The Lancaster Family"
+    bookNumber: 1
 
 ###
 GET https://library-portal-3dzg.onrender.com/users/6987e60d810d6a8bbfaa8bfe
+
+firstName: "Ava"
+lastName: "Henderson"
+age: 29
+email:  "ava.henderson@example.com"
+phoneNum: "385-555-1023"
+address: "742 Maple Ridge Dr, Tooele, UT"
 
 ###
 POST http://localhost:8080/books
@@ -32,3 +83,65 @@ Content-Type: application/json
 ###
 POST http://localhost:8080/users
 Content-Type: application.json
+
+###
+DELETE http://localhost:8080/books/6987e5fd810d6a8bbfaa8bf6
+
+title: "Seeking Persephone"
+author: "Sarah M. Eden" 
+genre: "Regency Romance"
+year: 2008
+publishedBy: "Covenant Communications"
+description: "A thoughtful and emotionally rich Regency romance about a reclusive du…"
+ageGroup: "Adult"
+themes: Array (5)
+    0: "marriage of convenience"
+    1: "healing from trauma"
+    2: "slow-burn romance"
+    3: "family loyalty"
+    4: "personal growth"
+setting: "Early 19th-century England"
+seriesInfo: Object
+    series: "The Lancaster Family"
+    bookNumber: 1
+
+###
+DELETE http://localhost:8080/users/6987e60d810d6a8bbfaa8bfe
+
+firstName: "Ava"
+lastName: "Henderson"
+age: 29
+email:  "ava.henderson@example.com"
+phoneNum: "385-555-1023"
+address: "742 Maple Ridge Dr, Tooele, UT"
+
+###
+PUT  http://localhost:8080/books/6987e5fd810d6a8bbfaa8bf6
+
+title: "Seeking Persephone"
+author: "Sarah M. Eden" 
+genre: "Regency Romance"
+year: 2008
+publishedBy: "Covenant Communications"
+description: "A thoughtful and emotionally rich Regency romance about a reclusive du…"
+ageGroup: "Adult"
+themes: Array (5)
+    0: "marriage of convenience"
+    1: "healing from trauma"
+    2: "slow-burn romance"
+    3: "family loyalty"
+    4: "personal growth"
+setting: "Early 19th-century England"
+seriesInfo: Object
+    series: "The Lancaster Family"
+    bookNumber: 1
+
+###
+PUT  http://localhost:8080/users/6987e60d810d6a8bbfaa8bfe
+
+firstName: "Ava"
+lastName: "Henderson"
+age: 29
+email:  "ava.henderson@example.com"
+phoneNum: "385-555-1023"
+address: "742 Maple Ridge Dr, Tooele, UT"
