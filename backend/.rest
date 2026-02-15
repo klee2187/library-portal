@@ -77,8 +77,18 @@ phoneNum: "385-555-1023"
 address: "742 Maple Ridge Dr, Tooele, UT"
 
 ###
-POST http://localhost:8080/books
-Content-Type: application/json
+curl -X POST http://localhost:8080/books -H "Content-Type: application/json" -d '{
+  "title":"Example",
+  "author":"Author Name",
+  "genre":"Fiction",
+  "year":2020,
+  "publishedBy":"Publisher",
+  "ageGroup":"Adult",
+  "themes":["adventure","friendship"],
+  "setting":"Somewhere",
+  "series":"My Series",
+  "bookNumber":1
+}'
 
 ###
 POST http://localhost:8080/users

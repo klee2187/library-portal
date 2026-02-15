@@ -8,19 +8,16 @@ const getAll = async (req, res) => {
     if (!db) {
       return res.status(500).json({ message: 'Database connection not established' });
     }
-    const result = await db
-    .collection('books')
-    .find();
+    
+    const lists = await db
+      .collection('books')
+      .find()
+      .toArray();
 
-    const lists = await result.toArray();
-    res.setHeader('Content-Type', 'application/json');
-    res.status(200).json(lists);
-
-    if (!lists.length) {
+      if (!lists || lists.length === 0) {
+        return res.status(200).json({ message: 'No books found', data: [] });
+      }
       res.status(200).json(lists);
-    } else {
-      res.status(200).json({ message: 'No books found', data: [] });
-    }
 
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -34,17 +31,15 @@ const getSingle = async (req, res) => {
     }
     const bookId = new ObjectId(req.params.id);
     const db = mongodb.getDb();
-    const result = await db
+    const lists = await db
       .collection('books')
-      .find({ _id: bookId });
+      .find({ _id: bookId })
+      .toArray();
 
-    result.toArray().then((lists) => {
-      if (err) {
-        return res.status(500).json({ message: err.message });
+      if (!lists || lists.length === 0) {
+        return res.status(404).json({ message: 'Book not found' });
       }
-      res.setHeader('Content-Type', 'application/json');
-      res.status(200).json(lists[0]);
-    });
+      return res.status(200).json(lists[0]);
 
     } catch (err) {
       res.status(500).json({ message: err.message });

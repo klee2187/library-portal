@@ -7,7 +7,7 @@ const seriesInfoSchema = new mongoose.Schema({
 
 const bookSchema = new mongoose.Schema({
     title: { type: String, required: true },
-    author: { type: String, requried: true},
+    author: { type: String, required: true},
     genre: { type: String, required: true},
     year: { type: Number, required: true },
     publishedBy: { type: String, required: true },
