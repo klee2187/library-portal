@@ -12,10 +12,17 @@ app
     res.setHeader('Access-Control-Allow-Origin', '*');
     next();
   })
+
+  //handlebars
+  .engine('.hbs', exphbs({defaultLayout: 'main', extname: '.hbs'}))
+  .set('view engine', '.hbs')
   .use('/', routes);
 
-app.get('/', (req, res) => {
-  res.send('Library Portal API is running')
+  //Static folder
+  app.use(express.static(Path.join(__dirname, 'public')));
+
+app.get('/dashboard', (req, res) => {
+    res.send('Library Portal API is running')
 });
 
 mongodb.initDb((err) => {
