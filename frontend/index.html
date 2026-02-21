@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Portal</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>📚 Library Portal</h1>
+    </header>
+
+    <div class="container">
+        <div id="message" class="message"></div>
+
+        <div class="form-section">
+            <h2>Add a New Book</h2>
+            <form id="bookForm">
+                <div class="two-column">
+                    <div class="form-group">
+                        <label for="title">Title *</label>
+                        <input type="text" id="title" name="title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="author">Author *</label>
+                        <input type="text" id="author" name="author" required>
+                    </div>
+                </div>
+
+                <div class="two-column">
+                    <div class="form-group">
+                        <label for="genre">Genre *</label>
+                        <input type="text" id="genre" name="genre" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="year">Year *</label>
+                        <input type="number" id="year" name="year" required>
+                    </div>
+                </div>
+
+                <div class="two-column">
+                    <div class="form-group">
+                        <label for="publishedBy">Published By *</label>
+                        <input type="text" id="publishedBy" name="publishedBy" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ageGroup">Age Group *</label>
+                        <input type="text" id="ageGroup" name="ageGroup" placeholder="e.g., Adult, Young Adult, Children" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="themes">Themes * (comma-separated)</label>
+                    <input type="text" id="themes" name="themes" placeholder="e.g., adventure, mystery, romance" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="setting">Setting *</label>
+                    <input type="text" id="setting" name="setting" required>
+                </div>
+
+                <div class="two-column">
+                    <div class="form-group">
+                        <label for="series">Series (optional)</label>
+                        <input type="text" id="series" name="series">
+                    </div>
+                    <div class="form-group">
+                        <label for="bookNumber">Book Number (optional)</label>
+                        <input type="number" id="bookNumber" name="bookNumber">
+                    </div>
+                </div>
+
+                <button type="submit">Add Book</button>
+            </form>
+        </div>
+
+        <div class="books-section">
+            <h2>Books in Library</h2>
+            <div id="booksList"></div>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = 'http://localhost:3000/books';
+
+        // Show message
+        function showMessage(message, type) {
+            const messageEl = document.getElementById('message');
+            messageEl.textContent = message;
+            messageEl.className = `message ${type}`;
+            setTimeout(() => {
+                messageEl.className = 'message';
+            }, 4000);
+        }
+
+        // Load all books
+        async function loadBooks() {
+            try {
+                const response = await fetch(API_URL);
+                const books = await response.json();
+                displayBooks(Array.isArray(books) ? books : (books.data || []));
+            } catch (error) {
+                console.error('Error loading books:', error);
+                showMessage('Error loading books', 'error');
+            }
+        }
+
+        // Display books
+        function displayBooks(books) {
+            const booksList = document.getElementById('booksList');
+            if (!books || books.length === 0) {
+                booksList.innerHTML = '<p style="color: #888;">No books found. Add one to get started!</p>';
+                return;
+            }
+
+            booksList.innerHTML = books.map(book => `
+                <div class="book-item">
+                    <h3>${book.title}</h3>
+                    <p><strong>Author:</strong> ${book.author}</p>
+                    <p><strong>Genre:</strong> ${book.genre}</p>
+                    <p><strong>Published By:</strong> ${book.publishedBy}</p>
+                    <p><strong>Age Group:</strong> ${book.ageGroup}</p>
+                    <p><strong>Themes:</strong> ${Array.isArray(book.themes) ? book.themes.join(', ') : book.themes}</p>
+                    <p><strong>Setting:</strong> ${book.setting}</p>
+                    ${book.seriesInfo?.series ? `<p><strong>Series:</strong> ${book.seriesInfo.series} #${book.seriesInfo.bookNumber}</p>` : ''}
+                    <div class="meta">Year: ${book.year} | ID: ${book._id}</div>
+                    <div class="book-actions">
+                        <button onclick="deleteBook('${book._id}')">Delete</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Add book
+        document.getElementById('bookForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const formData = {
+                title: document.getElementById('title').value,
+                author: document.getElementById('author').value,
+                genre: document.getElementById('genre').value,
+                year: parseInt(document.getElementById('year').value),
+                publishedBy: document.getElementById('publishedBy').value,
+                ageGroup: document.getElementById('ageGroup').value,
+                themes: document.getElementById('themes').value.split(',').map(t => t.trim()),
+                setting: document.getElementById('setting').value,
+                series: document.getElementById('series').value || undefined,
+                bookNumber: document.getElementById('bookNumber').value ? parseInt(document.getElementById('bookNumber').value) : undefined
+            };
+
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                if (response.ok) {
+                    showMessage('Book added successfully!', 'success');
+                    document.getElementById('bookForm').reset();
+                    loadBooks();
+                } else {
+                    const error = await response.json();
+                    showMessage(`Error: ${error.message}`, 'error');
+                }
+            } catch (error) {
+                console.error('Error adding book:', error);
+                showMessage('Error adding book', 'error');
+            }
+        });
+
+        // Delete book
+        async function deleteBook(bookId) {
+            if (!confirm('Are you sure you want to delete this book?')) return;
+
+            try {
+                const response = await fetch(`${API_URL}/${bookId}`, {
+                    method: 'DELETE'
+                });
+
+                if (response.ok) {
+                    showMessage('Book deleted successfully!', 'success');
+                    loadBooks();
+                } else {
+                    showMessage('Error deleting book', 'error');
+                }
+            } catch (error) {
+                console.error('Error deleting book:', error);
+                showMessage('Error deleting book', 'error');
+            }
+        }
+
+        // Load books on page load
+        loadBooks();
+    </script>
+</body>
+</html>
