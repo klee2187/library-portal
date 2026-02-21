@@ -3,15 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Library Portal</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <title>Library Portal - Manage Your Book Collection</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Lora:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../public/css/styles.css">
 </head>
 <body>
     <header>
         <h1>📚 Library Portal</h1>
+        <p>Your Personal Book Collection Manager</p>
     </header>
 
     <div class="container">
+        <div class="welcome-section">
+            <h2>Welcome to Your Library</h2>
+            <p>Organize and manage your book collection with ease. Add new books, browse your collection, and keep track of all your reading adventures in one place.</p>
+        </div>
+
         <div id="message" class="message"></div>
 
         <div class="form-section">
@@ -110,7 +119,7 @@
         function displayBooks(books) {
             const booksList = document.getElementById('booksList');
             if (!books || books.length === 0) {
-                booksList.innerHTML = '<p style="color: #888;">No books found. Add one to get started!</p>';
+                booksList.innerHTML = '<div class="empty-state"><p>📚 No books in your library yet</p><p style="font-size: 0.9em;">Start by adding your first book using the form above!</p></div>';
                 return;
             }
 
@@ -124,9 +133,9 @@
                     <p><strong>Themes:</strong> ${Array.isArray(book.themes) ? book.themes.join(', ') : book.themes}</p>
                     <p><strong>Setting:</strong> ${book.setting}</p>
                     ${book.seriesInfo?.series ? `<p><strong>Series:</strong> ${book.seriesInfo.series} #${book.seriesInfo.bookNumber}</p>` : ''}
-                    <div class="meta">Year: ${book.year} | ID: ${book._id}</div>
+                    <div class="meta">📅 Year: ${book.year}</div>
                     <div class="book-actions">
-                        <button onclick="deleteBook('${book._id}')">Delete</button>
+                        <button class="delete-btn" onclick="deleteBook('${book._id}')">Delete</button>
                     </div>
                 </div>
             `).join('');
