@@ -1,4 +1,4 @@
-const Book = require('../models/book');
+const book = require('../models/book');
 
 // GET ALL
 const getAll = async (req, res) => {
@@ -13,7 +13,7 @@ const getAll = async (req, res) => {
 // GET SINGLE
 const getSingle = async (req, res) => {
   try {
-    const book = await Book.findById(req.params.id);
+    const book = await book.findById(req.params.id);
 
     if (!book) {
       return res.status(404).json({ message: 'Book not found' });
@@ -28,7 +28,7 @@ const getSingle = async (req, res) => {
 // ADD
 const addBook = async (req, res) => {
   try {
-    const book = await Book.create(req.body);
+    const book = await book.create(req.body);
     res.status(201).json(book);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -38,7 +38,7 @@ const addBook = async (req, res) => {
 // UPDATE
 const updateBook = async (req, res) => {
   try {
-    const updated = await Book.findByIdAndUpdate(req.params.id, req.body, {
+    const updated = await book.findByIdAndUpdate(req.params.id, req.body, {
       new: true
     });
 
@@ -55,7 +55,7 @@ const updateBook = async (req, res) => {
 // DELETE
 const deleteBook = async (req, res) => {
   try {
-    const deleted = await Book.findByIdAndDelete(req.params.id);
+    const deleted = await book.findByIdAndDelete(req.params.id);
 
     if (!deleted) {
       return res.status(404).json({ message: 'Book not found' });

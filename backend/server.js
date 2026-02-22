@@ -1,9 +1,11 @@
 const dotenv = require('dotenv');
 dotenv.config();
+console.log("MONGODB_URI:", process.env.MONGODB_URI);
 
 const express = require('express');
 const morgan = require('morgan');
 const passport = require('passport');
+const session = require('express-session')
 const connectDB = require('./config/db');
 
 const routes = require('./routes');
@@ -21,6 +23,17 @@ app.use(express.urlencoded({ extended: true }));
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
+
+// Express-session
+app.use(session({
+  secret: 'super pig',
+  resave: false,
+  saveUninitialized: false
+}))
+
+//Passport middleware
+app.use(passport.initialize())
+app.use(passport.session())
 
 //CORS
 app.use((req, res, next) => {

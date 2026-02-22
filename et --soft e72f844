@@ -1,0 +1,17 @@
+[33m696f915[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m Remove .env from repository
+[33m337921e[m fixed passport bugs
+[33m97d009c[m added passport documantation
+[33me72f844[m converted to mongoose
+[33ma6cceec[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m added hbs files
+[33mf0c6fe3[m fixed styles and index to show all styles
+[33mb573c0a[m added frontend
+[33m60910ab[m bug fixes
+[33mb013026[m added PUT and DELETE routes and validation and error handling
+[33mf3b9a2a[m made corrections in models/book.js
+[33m644cc0c[m added to swagger.json
+[33m757a83a[m swagger fixes
+[33m2690297[m added swagger documentation
+[33m4139121[m fixes
+[33mcd0350a[m updated rest file
+[33m44613fc[m creation of library node.js project
+[33m7df3278[m Initial commit

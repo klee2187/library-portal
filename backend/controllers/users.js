@@ -1,9 +1,9 @@
-const User = require('../models/user');
+const user = require('../models/user');
 
 // GET ALL
 const getAll = async (req, res) => {
   try {
-    const users = await User.find();
+    const users = await user.find();
     res.status(200).json(users);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -13,7 +13,7 @@ const getAll = async (req, res) => {
 // GET SINGLE
 const getSingle = async (req, res) => {
   try {
-    const user = await User.findById(req.params.id);
+    const user = await user.findById(req.params.id);
 
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
@@ -28,7 +28,7 @@ const getSingle = async (req, res) => {
 // ADD
 const addUser = async (req, res) => {
   try {
-    const user = await User.create(req.body);
+    const user = await user.create(req.body);
     res.status(201).json(user);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -38,7 +38,7 @@ const addUser = async (req, res) => {
 // UPDATE
 const updateUser = async (req, res) => {
   try {
-    const updated = await User.findByIdAndUpdate(req.params.id, req.body, {
+    const updated = await user.findByIdAndUpdate(req.params.id, req.body, {
       new: true
     });
 
@@ -55,7 +55,7 @@ const updateUser = async (req, res) => {
 // DELETE
 const deleteUser = async (req, res) => {
   try {
-    const deleted = await User.findByIdAndDelete(req.params.id);
+    const deleted = await user.findByIdAndDelete(req.params.id);
 
     if (!deleted) {
       return res.status(404).json({ message: 'User not found' });
