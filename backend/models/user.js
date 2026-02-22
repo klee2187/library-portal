@@ -19,7 +19,7 @@ const userSchema = new mongoose.Schema({
     },
     age: { 
         type: Number, 
-        required: true
+        required: false
     },
     email: { 
         type: String, 
@@ -27,11 +27,11 @@ const userSchema = new mongoose.Schema({
     },
     phoneNum: { 
         type: String, 
-        required: true 
+        required: false 
     },
     address: { 
         type: String, 
-        required: true 
+        required: false
     },
     image: {
         type: String, 

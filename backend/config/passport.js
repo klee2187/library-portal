@@ -8,8 +8,28 @@ module.exports = function (passport) {
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
         callbackURL: '/auth/google/callback'
     },
-    async (accessToken, refreshToken, Profiler, done) => {
-        console.log(profile)
+    async (accessToken, refreshToken, Profile, done) => {
+        const newUser = {
+            googleId: profile.id,
+            displayName: profile.displayName,
+            firstName: profileName.firstName,
+            lastName: profileName.lastName,
+            email: profile.emails?.[0].value || null,
+            image: profile.photos[0].value || null
+        }
+
+        try {
+            let user = await User.findOne({ googleId: profile.id })
+        
+            if (user) {
+                done(null, user)
+            } else {
+                user = await User.create(newUser)
+                done(null, user)
+            }
+        } catch (err) {
+            console.error(err)
+        }
     }))
 
     passport.serializeUser((user, done) => {

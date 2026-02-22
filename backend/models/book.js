@@ -6,14 +6,37 @@ const seriesInfoSchema = new mongoose.Schema({
 }, { _id: false });
 
 const bookSchema = new mongoose.Schema({
-    title: { type: String, required: true },
-    author: { type: String, required: true},
-    genre: { type: String, required: true},
-    year: { type: Number, required: true },
-    publishedBy: { type: String, required: true },
-    ageGroup: { type: String, required: true },
-    themes: { type: [String], default: [] },
-    setting: { type: String },
+    title: { 
+        type: String, 
+        required: true 
+    },
+    author: { 
+        type: String, 
+        required: true
+    },
+    genre: { 
+        type: String, 
+        required: true
+    },
+    year: { 
+        type: Number, 
+        required: true 
+    },
+    publishedBy: { 
+        type: String, 
+        required: true 
+    },
+    ageGroup: { 
+        type: String, 
+        required: true 
+    },
+    themes: { 
+        type: [String], 
+        default: [] 
+    },
+    setting: { 
+        type: String 
+    },
     seriesInfo: {
         type: seriesInfoSchema,
         default: null
