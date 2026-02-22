@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const seriesInfoSchema = new mongoose.Schema({
     series: { type: String},
@@ -20,4 +20,4 @@ const bookSchema = new mongoose.Schema({
     }
 });
 
-export default mongoose.model('book', bookSchema);
+module.exports = mongoose.model('Book', bookSchema);
