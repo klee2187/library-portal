@@ -1,3 +1,4 @@
+const path = require('path');
 const express = require('express');
 const dotenv = require('dotenv');
 
@@ -18,7 +19,7 @@ const app = express();
 connectDB();
 
 // Static 
-app.use(express.static('frontend/public'));
+app.use('/public', express.static(path.join(__dirname, '../frontend/public')));
 
 // Middleware -- parse request bodies
 app.use (express.json());
@@ -35,7 +36,7 @@ app.engine('hbs', engine({
   extname: '.hbs'
 }));
 app.set('view engine', 'hbs');   
-app.set('views', './views');
+app.set('views', path.join(__dirname, '../frontend/views'));
 
 
 // Express-session

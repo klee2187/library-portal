@@ -1,8 +1,10 @@
 const router = require('express').Router();
 
 // Login/Landing page       GET /
-router.get('/', (req, res) => {
-    res.render('login')
+router.get('/login', (req, res) => {
+    res.render('login', {
+        layout: 'login'
+    })
 })
 
 // Dashboard page         GET /
