@@ -15,7 +15,7 @@ module.exports = function (passport) {
             firstName: profile.name.givenName,
             lastName: profile.name.familyName,
             email: profile.emails?.[0].value || null,
-            image: profile.photos[0].value || null
+            image: profile.photos?.[0].value || null
         }
 
         try {
@@ -36,9 +36,12 @@ module.exports = function (passport) {
         done(null, user.id);
     })
 
-    passport.deserializeUser((id, done) => {
-        User.findById(id, function(err, user) {
-            done(err, user);
-        })
+    passport.deserializeUser(async (id, done) => {
+      try {
+        const user = await User.findById(id);
+        done(null, user);
+      } catch (err) {
+        done(err, null);
+      }
     })
-};
+}

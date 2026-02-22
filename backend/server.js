@@ -49,22 +49,22 @@ app.use(session({
   secret: 'super pig',
   resave: false,
   saveUninitialized: false
-}))
+}));
 
 //Passport middleware
-app.use(passport.initialize())
-app.use(passport.session())
+app.use(passport.initialize());
+app.use(passport.session());
 
 //CORS
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     next();
-  })
+  });
 
 // Routes
 app.use('/', routes);
-app.use('/', require('./routes/index'))
-app.use('/auth', require('./routes/auth'))
+app.use('/', require('./routes/index'));
+app.use('/', require('./routes/auth'));
 
 app.get('/', (req, res) => {
   res.send('Library Portal API is running')
