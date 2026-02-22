@@ -16,6 +16,9 @@ const app = express();
 // Connect to MongoDB (Mongoose)
 connectDB();
 
+// Static 
+app.use(express.static('frontend/public'));
+
 app.use (express.json());
 app.use(express.urlencoded({ extended: true }));
 
