@@ -1,10 +1,19 @@
-const express = require('express');
-const routes = require('express').Router();
+const router = require('express').Router();
 
-routes.use('/books', require('./books')); 
-routes.use('/users', require('./users')); 
-routes.use('/', require('./swagger'));
-routes.use('/', require('./auth'));
+// Login landing page
+router.get('/', (req, res) => {
+    res.render('login')
+})
+
+// Dashboard page
+router.get('/dashboard', (req, res) => {
+    res.render('dashboard')
+})
+
+router.use('/books', require('./books')); 
+router.use('/users', require('./users')); 
+router.use('/readingList', require('./readingList'));
+router.use('/', require('./swagger'));
 
 
-module.exports = routes;
+module.exports = router;

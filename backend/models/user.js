@@ -36,10 +36,18 @@ const userSchema = new mongoose.Schema({
     image: {
         type: String, 
     },
+    role: {
+      type: String,
+      enum: ['user', 'employee'],
+      default: 'user'
+    },
+    readingList: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Book'
+    }],
     createdAt: {
         type: Date,
         default: Date.now
     }
-
 });
 module.exports = mongoose.model('User', userSchema);
