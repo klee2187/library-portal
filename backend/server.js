@@ -8,7 +8,12 @@ const passport = require('passport');
 const session = require('express-session');
 const connectDB = require('./config/db');
 
+// Load config
 require('dotenv').config({ path: './config/.env' });
+
+//Passport config
+require('./config/passport')(passport);
+
 
 const routes = require('./routes');
 
@@ -59,6 +64,7 @@ app.use((req, res, next) => {
 // Routes
 app.use('/', routes);
 app.use('/', require('./routes/index'))
+app.use('/auth', require('./routes/auth'))
 
 app.get('/', (req, res) => {
   res.send('Library Portal API is running')

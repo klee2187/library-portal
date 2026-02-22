@@ -1,11 +1,13 @@
-const book = require('../models/book');
+const Book = require('../models/book');
 
 // GET ALL
+
 const getAll = async (req, res) => {
   try {
     const books = await Book.find();
     res.status(200).json(books);
   } catch (err) {
+    console.error('GET /books error:'. err);
     res.status(500).json({ message: err.message });
   }
 };
@@ -13,7 +15,7 @@ const getAll = async (req, res) => {
 // GET SINGLE
 const getSingle = async (req, res) => {
   try {
-    const book = await book.findById(req.params.id);
+    const book = await Book.findById(req.params.id);
 
     if (!book) {
       return res.status(404).json({ message: 'Book not found' });
@@ -28,7 +30,7 @@ const getSingle = async (req, res) => {
 // ADD
 const addBook = async (req, res) => {
   try {
-    const book = await book.create(req.body);
+    const book = await Book.create(req.body);
     res.status(201).json(book);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -38,7 +40,7 @@ const addBook = async (req, res) => {
 // UPDATE
 const updateBook = async (req, res) => {
   try {
-    const updated = await book.findByIdAndUpdate(req.params.id, req.body, {
+    const updated = await Book.findByIdAndUpdate(req.params.id, req.body, {
       new: true
     });
 
