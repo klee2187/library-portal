@@ -1,12 +1,13 @@
-const dotenv = require('dotenv');
-dotenv.config();
-console.log("MONGODB_URI:", process.env.MONGODB_URI);
-
 const express = require('express');
+const dotenv = require('dotenv');
+
 const morgan = require('morgan');
+const { engine } = require('express-handlebars');
 const passport = require('passport');
-const session = require('express-session')
+const session = require('express-session');
 const connectDB = require('./config/db');
+
+require('dotenv').config({ path: './config/.env' });
 
 const routes = require('./routes');
 
@@ -19,6 +20,7 @@ connectDB();
 // Static 
 app.use(express.static('frontend/public'));
 
+// Middleware -- parse request bodies
 app.use (express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -26,6 +28,15 @@ app.use(express.urlencoded({ extended: true }));
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
+
+// Handlebars
+app.engine('hbs', engine({
+  defaultLayout: 'main',
+  extname: '.hbs'
+}));
+app.set('view engine', 'hbs');   
+app.set('views', './views');
+
 
 // Express-session
 app.use(session({
@@ -46,10 +57,11 @@ app.use((req, res, next) => {
 
 // Routes
 app.use('/', routes);
+app.use('/', require('./routes/index'))
 
 app.get('/', (req, res) => {
   res.send('Library Portal API is running')
 });
 
-app.listen(port, () => console.log(`Server running on port ${port}`));
+app.listen(port, () => console.log(`Server running in ${process.env.NODE_ENV} on port ${port}`));
 

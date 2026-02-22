@@ -1,11 +1,11 @@
 const router = require('express').Router();
 
-// Login landing page
+// Login/Landing page       GET /
 router.get('/', (req, res) => {
     res.render('login')
 })
 
-// Dashboard page
+// Dashboard page         GET /
 router.get('/dashboard', (req, res) => {
     res.render('dashboard')
 })
