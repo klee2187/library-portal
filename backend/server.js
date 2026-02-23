@@ -1,11 +1,13 @@
 const path = require('path');
 const express = require('express');
+const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 
 const morgan = require('morgan');
 const { engine } = require('express-handlebars');
 const passport = require('passport');
 const session = require('express-session');
+const MongoStore = require('connect-mongo');
 const connectDB = require('./config/db');
 
 // Load config
@@ -38,8 +40,10 @@ if (process.env.NODE_ENV === 'development') {
 // Handlebars
 app.engine('hbs', engine({
   defaultLayout: 'main',
-  extname: '.hbs'
+  extname: '.hbs',
+  partialsDir: path.join(__dirname, '../frontend/views/partials')
 }));
+
 app.set('view engine', 'hbs');   
 app.set('views', path.join(__dirname, '../frontend/views'));
 
@@ -48,7 +52,11 @@ app.set('views', path.join(__dirname, '../frontend/views'));
 app.use(session({
   secret: 'super pig',
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: false,
+  store: MongoStore.create({ 
+    mongoUrl: process.env.MONGODB_URI,
+    collectionName: 'sessions'
+   })
 }));
 
 //Passport middleware
