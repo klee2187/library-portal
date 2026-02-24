@@ -7,7 +7,7 @@ const morgan = require('morgan');
 const { engine } = require('express-handlebars');
 const passport = require('passport');
 const session = require('express-session');
-const MongoStore = require('connect-mongo');
+const MongoDBStore = require('connect-mongodb-session')(session);
 const connectDB = require('./config/db');
 
 // Load config
@@ -16,9 +16,7 @@ require('dotenv').config({ path: './config/.env' });
 //Passport config
 require('./config/passport')(passport);
 
-
 const routes = require('./routes');
-
 const port = process.env.PORT || 8080;
 const app = express();
 
@@ -53,9 +51,9 @@ app.use(session({
   secret: 'super pig',
   resave: false,
   saveUninitialized: false,
-  store: MongoStore.create({ 
-    mongoUrl: process.env.MONGODB_URI,
-    collectionName: 'sessions'
+  store: new MongoDBStore({ 
+    uri: process.env.MONGODB_URI,
+    collection: 'sessions'
    })
 }));
 
@@ -72,7 +70,7 @@ app.use((req, res, next) => {
 // Routes
 app.use('/', routes);
 app.use('/', require('./routes/index'));
-app.use('/', require('./routes/auth'));
+app.use('/auth', require('./routes/auth'));
 
 app.get('/', (req, res) => {
   res.send('Library Portal API is running')

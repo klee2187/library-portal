@@ -8,15 +8,22 @@ module.exports = function (passport) {
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
         callbackURL: '/auth/google/callback'
     },
+
     async (accessToken, refreshToken, profile, done) => {
+        const employeeEmails = [
+        "admin@library.com",
+        "kristen@example.com"
+        ];
+
         const newUser = {
             googleId: profile.id,
             displayName: profile.displayName,
             firstName: profile.name.givenName,
             lastName: profile.name.familyName,
             email: profile.emails?.[0].value || null,
-            image: profile.photos?.[0].value || null
-        }
+            image: profile.photos?.[0].value || null,
+            role: employeeEmails.includes(profile.emails?.[0].value) ? 'employee' : 'user'
+        };
 
         try {
             let user = await User.findOne({ googleId: profile.id })

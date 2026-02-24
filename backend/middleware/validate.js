@@ -48,6 +48,4 @@ const saveBook = (req, res, next) => {
   });
 };
 
-module.exports = {
-  saveUser, saveBook
-};
+module.exports = { saveUser, saveBook };
