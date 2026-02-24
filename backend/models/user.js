@@ -41,13 +41,9 @@ const userSchema = new mongoose.Schema({
       enum: ['user', 'employee'],
       default: 'user'
     },
-    readingList: [{
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Book'
-    }],
     createdAt: {
         type: Date,
         default: Date.now
     }
 });
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.models.User || mongoose.model('User', userSchema);

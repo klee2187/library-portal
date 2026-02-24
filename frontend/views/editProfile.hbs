@@ -1,0 +1,36 @@
+<div class="container">
+
+    <h3 style="color:#7b0000;">Edit Profile</h3>
+
+    <form action="/profile/edit" method="POST">
+
+        <div class="input-field">
+            <input type="text" name="firstName" value="{{user.firstName}}">
+            <label class="active">First Name</label>
+        </div>
+
+        <div class="input-field">
+            <input type="text" name="lastName" value="{{user.lastName}}">
+            <label class="active">Last Name</label>
+        </div>
+
+        <div class="input-field">
+            <input type="text" name="phoneNum" value="{{user.phoneNum}}">
+            <label class="active">Phone Number</label>
+        </div>
+
+        <div class="input-field">
+            <input type="text" name="address" value="{{user.address}}">
+            <label class="active">Address</label>
+        </div>
+
+        <div class="input-field">
+            <input type="number" name="age" value="{{user.age}}">
+            <label class="active">Age</label>
+        </div>
+
+        <button class="btn red-dark" type="submit">Save Changes</button>
+
+    </form>
+
+</div>

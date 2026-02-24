@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
+const Book = require('../models/book');
+const ReadingList = require('../models/readingList');
+
 const booksController = require('../controllers/books.js');
 const validation = require('../middleware/validate');
 const { ensureAuth, isAuthenticated } = require('../middleware/auth');
@@ -24,7 +27,13 @@ router.get('/:id', ensureAuth, async (req, res) => {
             return res.status(404).send('Book not found');
         }
 
-    res.render('bookDetails',{ book });
+        // Check if book is already on list
+        const inList = await ReadingList.findOne({
+            userId: req.user._id,
+            bookId: req.params.id
+        }).lean();
+
+    res.render('bookDetails',{ book, inList });
     } catch (err) {
         console.error(err);
         res.status(500).send('Server Error')

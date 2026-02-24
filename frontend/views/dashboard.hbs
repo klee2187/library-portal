@@ -9,6 +9,11 @@
                 <a href="/books/{{bookId._id}}" style="color:#f4d03f;">
                     {{bookId.title}}
                 </a>
+                <a href="/readingList/delete/{{bookId._id}}" 
+                class="secondary-content" 
+                style="color:#f4d03f; font-weight:bold;"> 
+                ✕ 
+                </a>
             </li>
         {{/each}}
     </ul>
@@ -28,11 +33,17 @@
                     <p><strong>Author:</strong> {{author}}</p>
                     <p><strong>Genre:</strong> {{genre}}</p>
                     <p><strong>Age Group:</strong> {{ageGroup}}</p>
+                    <div class="card-action">
+
+                </div>
+
                 </div>
 
                 <div class="card-action">
                     <a href="/books/{{_id}}">View Details</a>
+                    <a href="/readingList/add/{{_id}}" class="btn-small red-dark">Add</a>
                 </div>
+
 
             </div>
         </div>

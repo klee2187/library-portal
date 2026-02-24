@@ -1,0 +1,20 @@
+<div class="container">
+
+    <h3 style="color:#7b0000;">Your Profile</h3>
+
+    <img src="{{user.image}}" 
+         alt="Profile picture" 
+         class="circle responsive-img"
+         style="max-width:150px; border:3px solid #7b0000;">
+
+    <ul class="collection" style="color: rgb(245, 245, 173);">
+        <li class="collection-item"><strong>Name:</strong> {{user.firstName}} {{user.lastName}}</li>
+        <li class="collection-item"><strong>Email:</strong> {{user.email}}</li>
+        <li class="collection-item"><strong>Phone:</strong> {{user.phoneNum}}</li>
+        <li class="collection-item"><strong>Address:</strong> {{user.address}}</li>
+        <li class="collection-item"><strong>Age:</strong> {{user.age}}</li>
+    </ul>
+
+    <a href="/profile/edit" class="btn red-dark">Edit Profile</a>
+
+</div>

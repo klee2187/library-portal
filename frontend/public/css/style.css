@@ -56,3 +56,18 @@ nav ul li a {
     color: #f4d03f !important;
     font-weight: bold;
 }
+
+/* === PROFILE ===*/
+input, label {
+    color: #7b0000 !important;
+}
+
+input {
+    border-bottom: 1px solid #f4d03f !important;
+}
+
+input:focus {
+    border-bottom: 1px solid #f7e79e !important;
+    box-shadow: 0 1px 0 0 #f7e79e !important;
+}
+
