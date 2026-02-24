@@ -1,1 +1,40 @@
-<h1>Dashboard</h1>
+<h4>Welcome, {{name}}</h4>
+<p>Your Library Portal</p>
+
+{{#if readingList.length}}
+    <h5>Your Personal Reading List</h5>
+    <ul class="collection">
+        {{#each readingList}}
+            <li class="collection-item">
+                <a href="/books/{{bookId._id}}" style="color:#f4d03f;">
+                    {{bookId.title}}
+                </a>
+            </li>
+        {{/each}}
+    </ul>
+{{/if}}
+
+<div class="row">
+    {{#each books}}
+        <div class="col s12 m6 l4">
+            <div class="card book-card hoverable">
+
+                <div class="card-image">
+                    <img src="/public/images/{{image}}" alt="{{title}} cover" class="book-cover">
+                </div>
+
+                <div class="card-content">
+                    <p><strong>Title:</strong> {{title}}</p>
+                    <p><strong>Author:</strong> {{author}}</p>
+                    <p><strong>Genre:</strong> {{genre}}</p>
+                    <p><strong>Age Group:</strong> {{ageGroup}}</p>
+                </div>
+
+                <div class="card-action">
+                    <a href="/books/{{_id}}">View Details</a>
+                </div>
+
+            </div>
+        </div>
+    {{/each}}
+</div>

@@ -1,0 +1,31 @@
+<div class="container">
+
+    <h3 style="color:#f4d03f;">{{book.title}}</h3>
+    <h5>{{book.author}}</h5>
+
+    <img src="/public/images/{{book.image}}" 
+         alt="{{book.title}} cover" 
+         class="responsive-img" 
+         style="max-width: 300px; border: 3px solid #7b0000;">
+
+    <ul class="collection">
+        <li class="collection-item"><strong>Genre:</strong> {{book.genre}}</li>
+        <li class="collection-item"><strong>Year:</strong> {{book.year}}</li>
+        <li class="collection-item"><strong>Publisher:</strong> {{book.publishedBy}}</li>
+        <li class="collection-item"><strong>Audience:</strong> {{book.ageGroup}}</li>
+        <li class="collection-item"><strong>Themes:</strong> {{#each book.themes}}{{this}}, {{/each}}</li>
+        <li class="collection-item"><strong>Setting:</strong> {{book.setting}}</li>
+
+        {{#if book.seriesInfo}}
+            <li class="collection-item">
+                <strong>Series:</strong> {{book.seriesInfo.series}} (Book {{book.seriesInfo.bookNumber}})
+            </li>
+        {{/if}}
+    </ul>
+
+    <a href="/readingList/add/{{book._id}}" class="btn red-dark">
+        Add to Reading List
+    </a>
+
+</div>
+

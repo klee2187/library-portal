@@ -1,6 +1,7 @@
 [
     {
       "title": "Seeking Persephone",
+      "image": "persephone.png",
       "author": "Sarah M. Eden",
       "genre": "Regency Romance",
       "year": 2008,
@@ -22,6 +23,7 @@
     },
     {
       "title": "Percy Jackson and the Olympians",
+      "image": "percy-jackson.jpg",
       "author": "Rick Riordan",
       "genre": "Fantasy / Mythology Adventure",
       "year": 2005,
@@ -43,6 +45,7 @@
     },
     {
       "title": "Wings of Fire: The Hidden Kingdom",
+      "image": "wings-of-fire.jpg",
       "author": "Tui T. Sutherland",
       "genre": "Fantasy / Middle Grade Adventure",
       "year": 2013,
@@ -64,6 +67,7 @@
     },
     {
       "title": "The Count of Monte Cristo",
+      "image": "count-of-monte-cristo.jpg",
       "author": "Alexandre Dumas",
       "genre": "Classic Adventure / Historical Fiction",
       "year": 1844,
@@ -85,6 +89,7 @@
     },
     {
       "title": "The Outsiders",
+      "image": "outsiders.jpeg",
       "author": "S. E. Hinton",
       "genre": "Young Adult Fiction",
       "year": 1967,
@@ -106,6 +111,7 @@
     },
     {
       "title": "Frankenstein",
+      "image": "frankenstein.jpg",
       "author": "Mary Shelley",
       "genre": "Gothic Horror / Science Fiction",
       "year": 1818,
@@ -127,6 +133,7 @@
     },
     {
       "title": "Coraline",
+      "image": "coraline.jpg",
       "author": "Neil Gaiman",
       "genre": "Dark Fantasy / Children’s Horror",
       "year": 2002,

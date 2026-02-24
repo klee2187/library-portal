@@ -9,3 +9,50 @@ p {
     text-align: center;
 }
 
+/* === GLOBAL COLORS === */
+body {
+    background-color: #f6f0d3;
+    color: #4a0000;
+}
+
+/* === NAVBAR === */
+.nav-red {
+    background-color: #4a0000 !important;
+}
+
+nav .brand-logo {
+    color: #f4d03f;
+}
+
+nav ul li a {
+    color: #4a0000 !important;
+    font-weight: 600;
+}
+
+/* === BOOK CARDS === */
+.card {
+    background-color: #4a0000;
+    border: 1px solid #7b0000;
+}
+
+.card-content p {
+    color: #f7e79e;
+}
+
+.card-action a {
+    color: #f4d03f !important;
+    font-weight: bold;
+}
+
+/* === READING LIST === */
+.collection .collection-item {
+    background-color: #4a0000 !important;
+    color: #f7e79e !important;
+    border-bottom: 1px solid #7b0000 !important;
+}
+
+.btn.red-dark {
+    background-color: #7b0000 !important;
+    color: #f4d03f !important;
+    font-weight: bold;
+}

@@ -10,6 +10,10 @@ const bookSchema = new mongoose.Schema({
         type: String, 
         required: true 
     },
+    image: {
+        type: String,
+        default: 'placeholder.jpg'
+    },
     author: { 
         type: String, 
         required: true
@@ -43,4 +47,4 @@ const bookSchema = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('Book', bookSchema);
+module.exports = mongoose.models.Book || mongoose.model('Book', bookSchema);
