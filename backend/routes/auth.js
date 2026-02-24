@@ -11,7 +11,12 @@ router.get('/google', passport.authenticate('google', {
 router.get('/google/callback', 
     passport.authenticate('google', { failureRedirect: '/login' }),
     (req, res) => {
-        res.redirect('/dashboard');
+    
+        if (req.user.role === 'employee') {
+            return res.redirect('/manage-books');
+        }
+
+        return res.redirect('/dashboard');
     }
 );
 

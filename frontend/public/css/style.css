@@ -29,6 +29,40 @@ nav ul li a {
     font-weight: 600;
 }
 
+/* === LOGIN PAGE === */
+/* White login box */
+.login-container {
+    background: white;
+    width: 400px;
+    margin: 80px auto;
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+    color: #7b0000; /* dark red text */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* Red button with yellow text */
+.login-btn {
+    background-color: #7b0000 !important; /* dark red */
+    color: #f4d03f !important;            /* gold/yellow text */
+    font-weight: bold;
+    border-radius: 6px;
+    margin-top: 20px;
+}
+
+/* Make the Google icon yellow too */
+.login-btn i {
+    color: #f4d03f !important;
+}
+
+/* Make the book icon dark red */
+.login-container h3 i {
+    color: #7b0000;
+}
+
+
+
 /* === BOOK CARDS === */
 .card {
     background-color: #4a0000;

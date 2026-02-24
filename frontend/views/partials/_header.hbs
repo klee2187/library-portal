@@ -6,6 +6,10 @@
             <li><a href="/profile">Profile</a></li>
             <li><a href="/dashboard">Dashboard</a></li>
             <li><a href="/auth/logout">Logout</a></li>
+            {{#if (eq user.role "employee")}}
+                <li><a href="/manage-books">Manage Books</a></li>
+            {{/if}}
+
         </ul>
     </div>
 </nav>

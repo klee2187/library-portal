@@ -1,0 +1,55 @@
+<div class="container">
+    <h3 style="color:#f4d03f;">Manage Books</h3>
+
+    <!-- Add Book Form -->
+    <div class="card" style="background:#4a0000; padding:20px;">
+        <h5 style="color:#f4d03f;">Add a New Book</h5>
+
+        <form action="/manage-books/add" method="POST">
+
+            <div class="input-field">
+                <input type="text" name="title" required>
+                <label class="active">Title</label>
+            </div>
+
+            <div class="input-field">
+                <input type="text" name="author" required>
+                <label class="active">Author</label>
+            </div>
+
+            <div class="input-field">
+                <input type="text" name="genre">
+                <label class="active">Genre</label>
+            </div>
+
+            <div class="input-field">
+                <input type="text" name="ageGroup">
+                <label class="active">Age Group</label>
+            </div>
+
+            <div class="input-field">
+                <input type="text" name="image">
+                <label class="active">Image URL</label>
+            </div>
+
+            <button class="btn red-dark" type="submit">Add Book</button>
+        </form>
+    </div>
+
+    <!-- Book List -->
+    <h4 style="color:#f4d03f; margin-top:40px;">Current Books</h4>
+
+    <ul class="collection">
+        {{#each books}}
+            <li class="collection-item" style="background:#4a0000; color:#f4d03f;">
+                {{title}} — {{author}}
+
+                <a href="/manage-books/delete/{{_id}}" 
+                   class="secondary-content" 
+                   style="color:#f4d03f; font-weight:bold;">
+                    ✕
+                </a>
+            </li>
+        {{/each}}
+    </ul>
+</div>

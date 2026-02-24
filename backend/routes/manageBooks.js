@@ -4,7 +4,7 @@ const { ensureAuth } = require('../middleware/auth');
 const { ensureEmployee } = require('../middleware/employee');
 
 // Management page
-router.get('/', ensureAuth, async (req, res) => {
+router.get('/', ensureAuth, ensureEmployee, async (req, res) => {
     const books = await Book.find().lean();
     res.render('manageBooks', { books });
 });
@@ -30,7 +30,7 @@ router.post('/add', ensureAuth, async (req, res) => {
             }
         });
 
-        res.redirect('/manageBooks');
+        res.redirect('/manage-books');
     } catch (err) {
         console.error(err);
         res.status(500).send('Error, book not added');
@@ -41,7 +41,7 @@ router.post('/add', ensureAuth, async (req, res) => {
 router.get('/delete/:id', ensureAuth, async (req, res) => {
     try {
         await Book.findByIdAndDelete(req.params.id);
-        res.redirect('/manageBooks');
+        res.redirect('/manage-books');
 
     } catch (err) {
         console.error(err);
