@@ -38,30 +38,25 @@ nav ul li a {
     padding: 30px;
     border-radius: 12px;
     text-align: center;
-    color: #7b0000; /* dark red text */
+    color: #f7e79e;
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
-/* Red button with yellow text */
 .login-btn {
-    background-color: #7b0000 !important; /* dark red */
-    color: #f4d03f !important;            /* gold/yellow text */
+    background-color: #7b0000 !important;
+    color: #f4d03f !important;
     font-weight: bold;
     border-radius: 6px;
     margin-top: 20px;
 }
 
-/* Make the Google icon yellow too */
 .login-btn i {
     color: #f4d03f !important;
 }
 
-/* Make the book icon dark red */
 .login-container h3 i {
-    color: #7b0000;
+    color: #f7e79e;
 }
-
-
 
 /* === BOOK CARDS === */
 .card {
@@ -105,3 +100,11 @@ input:focus {
     box-shadow: 0 1px 0 0 #f7e79e !important;
 }
 
+/* === MANAGE BOOKS === */
+.input-field .active {
+    color:#f7e79e !important;
+}
+
+.input-field input {
+    color: #f4d03f;
+}

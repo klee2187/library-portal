@@ -5,6 +5,18 @@
     "description": "Books and Users API",
     "version": "1.0.0"
   },
+  "securityDefinitions": {
+    "cookieAuth": {
+      "type": "apiKey",
+      "in": "cookie",
+      "name": "connect.sid"
+    }
+  },
+  
+  "security": [
+    { "cookieAuth": [] }
+  ],
+
   "host": "library-portal-3dzg.onrender.com",
   "basePath": "/",
   "schemes": ["https"],

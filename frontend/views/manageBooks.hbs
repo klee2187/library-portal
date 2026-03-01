@@ -1,15 +1,16 @@
 <div class="container">
-    <h3 style="color:#f4d03f;">Manage Books</h3>
+    <h3 style="color: #7b0000;">Manage Books</h3>
 
     <!-- Add Book Form -->
-    <div class="card" style="background:#4a0000; padding:20px;">
-        <h5 style="color:#f4d03f;">Add a New Book</h5>
+    <div class="card" style="background:#4a0000; padding:20px;" 
+    >
+        <h5 style="color: #f4d03f;">Add a New Book</h5>
 
-        <form action="/manage-books/add" method="POST">
+        <form action="/manage-books/add" method="POST" style="color: #f4d03f;">
 
             <div class="input-field">
-                <input type="text" name="title" required>
-                <label class="active">Title</label>
+                <input type="text" name="title" style="color: #f4d03f;">
+                <label class="active" style="color: #f4d03f;">Title</label>
             </div>
 
             <div class="input-field">
@@ -37,7 +38,7 @@
     </div>
 
     <!-- Book List -->
-    <h4 style="color:#f4d03f; margin-top:40px;">Current Books</h4>
+    <h4 style="color:#7b0000; margin-top:40px;">Current Books</h4>
 
     <ul class="collection">
         {{#each books}}

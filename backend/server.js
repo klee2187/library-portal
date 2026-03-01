@@ -1,23 +1,41 @@
 const path = require('path');
 const express = require('express');
+const cors = require('cors');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 
 const morgan = require('morgan');
-const { engine } = require('express-handlebars');
+const expressHandlebars = require('express-handlebars');
 const passport = require('passport');
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const connectDB = require('./config/db');
 
 // Load config
-require('dotenv').config({ path: './config/.env' });
+require('dotenv').config();
 
 //Passport config
 require('./config/passport')(passport);
 
+// Register helpers for handlebars engine
+const hbs = expressHandlebars.create({
+  extname: '.hbs',
+  helpers: {
+    eq: (a, b) => a === b,
+    ne: (a, b) => a !== b,
+    lt: (a, b) => a < b,
+    gt: (a, b) => a > b,
+    lte: (a, b) => a <= b,
+    gte: (a, b) => a >= b,
+    and: (a, b) => a && b,
+    or: (a, b) => a || b
+  }
+});
+
 const routes = require('./routes');
 const port = process.env.PORT || 8080;
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json')
 const app = express();
 
 // Connect to MongoDB (Mongoose)
@@ -36,21 +54,28 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 // Handlebars
-app.engine('hbs', engine({
-  defaultLayout: 'main',
-  extname: '.hbs',
-  partialsDir: path.join(__dirname, '../frontend/views/partials')
-}));
+app.engine('hbs', hbs.engine);
 
-app.set('view engine', 'hbs');   
+app.set('view engine', '.hbs');   
 app.set('views', path.join(__dirname, '../frontend/views'));
 
+//CORS
+app.use(
+  cors({
+    origin: 'http://localhost',
+    credentials: true
+  })
+);
 
 // Express-session
 app.use(session({
-  secret: 'super pig',
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
+  cookie: { 
+    secure: false,
+    maxAge: 1000 * 60 * 30
+  },
   store: new MongoDBStore({ 
     uri: process.env.MONGODB_URI,
     collection: 'sessions'
@@ -61,18 +86,19 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-//CORS
-app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    next();
-  });
-
 // Routes
 app.use('/', routes);
 app.use('/', require('./routes/index'));
 app.use('/auth', require('./routes/auth'));
 app.use('/profile', require('./routes/profile'));
 app.use('/manage-books', require('./routes/manageBooks'));
+
+// Swagger with credentials
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, {
+  swaggerOptions: {
+    withCredentials: true
+  }
+}));
 
 app.get('/', (req, res) => {
   res.send('Library Portal API is running')
