@@ -62,7 +62,7 @@ app.set('views', path.join(__dirname, '../frontend/views'));
 //CORS
 app.use(
   cors({
-    origin: 'http://localhost',
+    origin: 'https://library-portal-3dzg.onrender.com',
     credentials: true
   })
 );
@@ -74,7 +74,9 @@ app.use(session({
   saveUninitialized: false,
   cookie: { 
     secure: false,
-    maxAge: 1000 * 60 * 30
+    sameSite: "none",
+    httpOnly: true,
+    maxAge: 1000 * 60 * 60 * 24
   },
   store: new MongoDBStore({ 
     uri: process.env.MONGODB_URI,
