@@ -5,55 +5,64 @@
     "description": "Books and Users API",
     "version": "1.0.0"
   },
-  "host": "localhost:8080",
+
+  "host": "library-portal-3dzg.onrender.com",
   "basePath": "/",
   "tags": [],
   "schemes": [
-    "http"
+    "https"
   ],
+
   "securityDefinitions": {
-    "bearerAuth": {
+    "BearerAuth": {
       "type": "apiKey",
       "name": "Authorization",
       "in": "header",
       "description": "Enter: Bearer {your JWT token}"
     }
   },
-  "consumes": [],
-  "produces": [],
+
   "paths": {
-    "/": {
+    "/users": {
       "get": {
-        "tags": [],
-        "description": "",
-        "parameters": [],
+        "description": "Get all users",
+        "produces": ["application/json"],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
+          "200": { "description": "Users returned successfully" },
+          "500": { "description": "Database connection not established" }
         }
       },
       "post": {
-        "tags": [],
-        "description": "",
-        "parameters": [],
-        "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "500": {
-            "description": "Internal Server Error"
+        "description": "Create a new user",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "firstName": { "type": "string" },
+                "lastName": { "type": "string" },
+                "age": { "type": "integer" },
+                "email": { "type": "string" },
+                "phoneNum": { "type": "string" },
+                "address": { "type": "string" }
+              }
+            }
           }
+        ],
+        "responses": {
+          "201": { "description": "User created successfully" },
+          "500": { "description": "Failed to add user" }
         }
       }
     },
-    "/{id}": {
+
+    "/users/{id}": {
       "get": {
-        "tags": [],
-        "description": "",
+        "description": "Get a single user",
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "id",
@@ -63,43 +72,47 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
+          "200": { "description": "User returned successfully" },
+          "400": { "description": "Invalid user ID" },
+          "404": { "description": "User not found" },
+          "500": { "description": "Database connection not established" }
         }
       },
       "put": {
-        "tags": [],
-        "description": "",
+        "description": "Update a user",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "firstName": { "type": "string" },
+                "lastName": { "type": "string" },
+                "age": { "type": "integer" },
+                "email": { "type": "string" },
+                "phoneNum": { "type": "string" },
+                "address": { "type": "string" }
+              }
+            }
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
+          "204": { "description": "User updated successfully" },
+          "400": { "description": "Invalid user ID" },
+          "404": { "description": "User not found" },
+          "500": { "description": "Failed to update user" }
         }
       },
       "delete": {
-        "tags": [],
-        "description": "",
+        "description": "Delete a user",
         "parameters": [
           {
             "name": "id",
@@ -109,23 +122,130 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
+          "204": { "description": "User deleted successfully" },
+          "400": { "description": "Invalid user ID" },
+          "404": { "description": "User not found" },
+          "500": { "description": "Failed to delete user" }
+        }
+      }
+    },
+
+    "/books": {
+      "get": {
+        "description": "Get all books",
+        "responses": {
+          "200": { "description": "Books returned successfully" },
+          "500": { "description": "Database connection not established" }
+        }
+      },
+      "post": {
+        "description": "Add a new book",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": { "$ref": "#/definitions/Book" }
+          }
+        ],
+        "responses": {
+          "201": { "description": "Book created successfully" },
+          "500": { "description": "Failed to add book" }
+        }
+      }
+    },
+
+    "/books/{id}": {
+      "get": {
+        "description": "Get a single book",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": { "description": "Book returned successfully" },
+          "400": { "description": "Invalid book ID" },
+          "404": { "description": "Book not found" },
+          "500": { "description": "Database connection not established" }
+        }
+      },
+
+      "put": {
+        "description": "Update a book",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
           },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": { "$ref": "#/definitions/Book" }
+          }
+        ],
+        "responses": {
+          "204": { "description": "Book updated successfully" },
+          "400": { "description": "Invalid book ID" },
+          "404": { "description": "Book not found" },
+          "500": { "description": "Failed to update book" }
+        }
+      },
+
+      "delete": {
+        "description": "Delete a book",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": { "description": "Book deleted successfully" },
+          "400": { "description": "Invalid book ID" },
+          "404": { "description": "Book not found" },
+          "500": { "description": "Failed to delete book" }
+        }
+      }
+    }
+  },
+
+  "definitions": {
+    "Book": {
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "author": { "type": "string" },
+        "genre": { "type": "string" },
+        "year": { "type": "integer" },
+        "publishedBy": { "type": "string" },
+        "ageGroup": { "type": "string" },
+        "themes": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "setting": { "type": "string" },
+        "seriesInfo": {
+          "type": "object",
+          "properties": {
+            "series": { "type": "string" },
+            "bookNumber": { "type": "integer" }
           }
         }
       }
     }
   },
-  "definitions": {},
   "security": [
-    {
-      "bearerAuth": []
+    { 
+      "bearerAuth": [] 
     }
   ]
 }
