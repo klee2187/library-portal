@@ -3,6 +3,7 @@ const ensureAuth = (req, res, next) => {
             return next()
         } else {
             res.redirect('/')
+            res.status(401).json({ message: 'Not authroized' });
         }
     }
     

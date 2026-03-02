@@ -14,11 +14,13 @@ router.get('/', booksController.getAll);
 router.get('/:id', booksController.getSingle);
 
 // Employee-only routes
-router.post('/', isAuthenticated, isEmployee, validation.saveBook, booksController.addBook);
-router.put('/:id', isAuthenticated, isEmployee, validation.saveBook, booksController.updateBook);
+router.post('/', isAuthenticated, isEmployee, validation.validateBook, booksController.addBook);
+router.put('/:id', isAuthenticated, isEmployee, validation.validateBook, booksController.updateBook);
 router.delete('/:id', isAuthenticated, isEmployee, booksController.deleteBook);
 
 // Single book      GET /
+router.put('/:id', ensureAuth, booksController.updateBook);
+router.delete('/:id', ensureAuth, booksController.deleteBook);
 router.get('/:id', ensureAuth, async (req, res) => {
     try{
         const book = await Book.findById(req.params.id).lean();
@@ -40,4 +42,4 @@ router.get('/:id', ensureAuth, async (req, res) => {
     }
 });
 
-module.exports = router;
+module.exports = router; 

@@ -7,8 +7,25 @@ const doc = {
   },
 
   // Use Render URL
-  host: 'library-portal-3dzg.onrender.com',
-  schemes: ['https'],
+  // Add security to tell swagger to use session cookie for authentication 
+  host: process.env.NODE_ENV === 'production'
+  ? 'library-portal-3dzg.onrender.com'
+  : 'localhost:8080',
+  schemes: process.env.NODE_ENV === 'production' 
+  ? ['https']
+  : ['http'],
+  securityDefinitions: {
+    cookieAuth: {
+      type: 'apiKey',
+      in: 'cookie',
+      name: 'connect.sid'  // Session cookie
+    }
+  },
+  security: [
+    {
+      cookieAuth: []
+    }
+  ]
 };
 
 const outputFile = './swagger.json';

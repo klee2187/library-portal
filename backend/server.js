@@ -62,19 +62,24 @@ app.set('views', path.join(__dirname, '../frontend/views'));
 //CORS
 app.use(
   cors({
-    origin: 'https://library-portal-3dzg.onrender.com',
+    origin:[ 
+      'http://localhost',
+      'https://library-portal-3dzg.onrender.com'
+    ],
     credentials: true
   })
 );
 
 // Express-session
+app.set('trust proxy', 1);
+
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
   cookie: { 
-    secure: true,
-    sameSite: "none",
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
     httpOnly: true,
     maxAge: 1000 * 60 * 60 * 24
   },

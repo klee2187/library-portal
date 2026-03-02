@@ -9,8 +9,8 @@ router.get('/', usersController.getAll);
 router.get('/:id', usersController.getSingle);
 
 // Validation routes
-router.post('/', validation.saveUser, usersController.addUser);
-router.put('/:id', validation.saveUser, usersController.updateUser);
+router.post('/', validation.validateUser, usersController.addUser);
+router.put('/:id', validation.validateUser, usersController.updateUser);
 router.delete('/:id', usersController.deleteUser);
 
 module.exports = router;
