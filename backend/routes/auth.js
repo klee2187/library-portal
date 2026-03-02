@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const passport = require('passport');
+const { generateToken } = require('../config/jwt');
 
 
 // Auth with Google
@@ -9,14 +10,16 @@ router.get('/google', passport.authenticate('google', {
 
 // Google auth callback
 router.get('/google/callback', 
-    passport.authenticate('google', { failureRedirect: '/login' }),
+    passport.authenticate('google', { session: false, failureRedirect: '/login' }),
     (req, res) => {
-    
-        if (req.user.role === 'employee') {
-            return res.redirect('/manage-books');
-        }
 
-        return res.redirect('/dashboard');
+        const token = generateToken(req.user);
+        res.json({ token });
+    
+        //if (req.user.role === 'employee') {
+        //    return res.redirect('/manage-books');
+        //}
+        //return res.redirect('/dashboard');
     }
 );
 

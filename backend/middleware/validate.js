@@ -6,13 +6,9 @@ const validate = (req, res, next) => {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
-    return res.status(412).json({
+    return res.status(422).json({
       success: false,
-      message: 'Validation failed',
-      errors: errors.array().map(err => ({
-        field:err.path,
-        message: err.msg
-      }))
+      errors: errors.array()
     });
   }
   next();;
@@ -20,13 +16,6 @@ const validate = (req, res, next) => {
 
 // User validation
 const validateUser = [
-
-  body('googleId')
-    .trim()
-    .notEmpty()
-    .withMessage('Google ID is required')
-    .isLength({ min: 5, max: 100 })
-    .withMessage('Google ID must be between 5 and 100 characters'),
 
   body('displayName')
     .trim()
@@ -61,7 +50,7 @@ const validateUser = [
   body('age')
     .notEmpty()
     .withMessage('Age is required')
-    .isInt({ min: 0 })
+    .isInt({ min: 1, max: 120 })
     .withMessage('Age must be a positive integer')
     .toInt(),
   
@@ -100,7 +89,7 @@ const validateUser = [
       if (
         date.getFullYear() !== year ||
         date.getMonth() !== month - 1 ||
-        date.getDay() !== day
+        date.getDate() !== day
       ) {
         throw new Error('Date must be in this format: MM/DD/YYYY');
       }
@@ -108,19 +97,7 @@ const validateUser = [
       return true;
     }),
 
-    validate,
-
-  (req, res, next) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(412).json({
-        success: false,
-        message: 'Validation failed',
-        data: errors.array()
-      });
-    }
-    next();
-  }
+    validate
 ];
 
 // Book validation
@@ -149,7 +126,7 @@ const validateBook = [
   body('year')
     .notEmpty()
     .withMessage('Year is required')
-    .isInt({min: 0})
+    .isInt({min: 1000, max: new Date().getFullYear() })
     .withMessage('Year must be a positive integer')
     .toInt(),
 
@@ -161,7 +138,7 @@ const validateBook = [
   body('ageGroup')
     .trim()
     .notEmpty()
-    .withMessage('Age grooup is required'),
+    .withMessage('Age group is required'),
 
   body('themes')
     .isArray({ min: 1 })
@@ -188,17 +165,7 @@ const validateBook = [
     .withMessage('Book number must be a positive integer')
     .toInt(),
 
-  (req, res, next) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(412).json ({
-        success: false,
-        message: 'Validation failed',
-        data: errors.array()
-      });
-    }
-    next();
-  }
-]
+  validate
+];
 
 module.exports = { validate, validateUser, validateBook };

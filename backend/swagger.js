@@ -15,15 +15,17 @@ const doc = {
   ? ['https']
   : ['http'],
   securityDefinitions: {
-    cookieAuth: {
+    bearerAuth: {
       type: 'apiKey',
-      in: 'cookie',
-      name: 'connect.sid'  // Session cookie
+      name: 'Authorization',
+      in: 'header',
+      description: 'Enter: Bearer {your JWT token}'
+      
     }
   },
   security: [
     {
-      cookieAuth: []
+      bearerAuth: []
     }
   ]
 };

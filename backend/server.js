@@ -7,15 +7,15 @@ const dotenv = require('dotenv');
 const morgan = require('morgan');
 const expressHandlebars = require('express-handlebars');
 const passport = require('passport');
-const session = require('express-session');
-const MongoDBStore = require('connect-mongodb-session')(session);
+//const session = require('express-session');
+//const MongoDBStore = require('connect-mongodb-session')(session);
 const connectDB = require('./config/db');
 
 // Load config
 require('dotenv').config();
 
 //Passport config
-require('./config/passport')(passport);
+//require('./config/passport')(passport);
 
 // Register helpers for handlebars engine
 const hbs = expressHandlebars.create({
@@ -40,6 +40,9 @@ const app = express();
 
 // Connect to MongoDB (Mongoose)
 connectDB();
+
+// 
+app.set('trust proxy', 1);
 
 // Static 
 app.use('/public', express.static(path.join(__dirname, '../frontend/public')));
@@ -71,27 +74,25 @@ app.use(
 );
 
 // Express-session
-app.set('trust proxy', 1);
-
-app.use(session({
-  secret: process.env.SESSION_SECRET,
-  resave: false,
-  saveUninitialized: false,
-  cookie: { 
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
-    httpOnly: true,
-    maxAge: 1000 * 60 * 60 * 24
-  },
-  store: new MongoDBStore({ 
-    uri: process.env.MONGODB_URI,
-    collection: 'sessions'
-   })
-}));
+//app.use(session({
+//  secret: process.env.SESSION_SECRET,
+//  resave: false,
+//  saveUninitialized: false,
+//  cookie: { 
+//    secure: process.env.NODE_ENV === 'production',
+//    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+//    httpOnly: true,
+//    maxAge: 1000 * 60 * 60 * 24
+//  },
+//  store: new MongoDBStore({ 
+//    uri: process.env.MONGODB_URI,
+//    collection: 'sessions'
+//   })
+//}));
 
 //Passport middleware
 app.use(passport.initialize());
-app.use(passport.session());
+//app.use(passport.session());
 
 // Routes
 app.use('/', routes);

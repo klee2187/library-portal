@@ -10,8 +10,8 @@ const { ensureAuth, isAuthenticated } = require('../middleware/auth');
 const { isEmployee } = require('../middleware/authorize');
 
 // Public routes
-router.get('/', booksController.getAll);
-router.get('/:id', booksController.getSingle);
+router.get('/', ensureAuth, booksController.getAll);
+router.get('/:id', ensureAuth, booksController.getSingle);
 
 // Employee-only routes
 router.post('/', isAuthenticated, isEmployee, validation.validateBook, booksController.addBook);
