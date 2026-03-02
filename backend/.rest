@@ -5,6 +5,9 @@ GET https://library-portal-3dzg.onrender.com/api-docs
 GET https://library-portal-3dzg.onrender.com/login
 
 ###
+GET https://library-portal-3dzg.onrender.com/auth/google
+
+###
 GET http://localhost:8080/books
 
 ###
