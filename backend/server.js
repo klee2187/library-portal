@@ -7,15 +7,13 @@ const dotenv = require('dotenv');
 const morgan = require('morgan');
 const expressHandlebars = require('express-handlebars');
 const passport = require('passport');
-//const session = require('express-session');
-//const MongoDBStore = require('connect-mongodb-session')(session);
 const connectDB = require('./config/db');
 
 // Load config
 require('dotenv').config();
 
 //Passport config
-//require('./config/passport')(passport);
+require('./config/passport')(passport);
 
 // Register helpers for handlebars engine
 const hbs = expressHandlebars.create({
@@ -73,26 +71,8 @@ app.use(
   })
 );
 
-// Express-session
-//app.use(session({
-//  secret: process.env.SESSION_SECRET,
-//  resave: false,
-//  saveUninitialized: false,
-//  cookie: { 
-//    secure: process.env.NODE_ENV === 'production',
-//    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
-//    httpOnly: true,
-//    maxAge: 1000 * 60 * 60 * 24
-//  },
-//  store: new MongoDBStore({ 
-//    uri: process.env.MONGODB_URI,
-//    collection: 'sessions'
-//   })
-//}));
-
 //Passport middleware
 app.use(passport.initialize());
-//app.use(passport.session());
 
 // Routes
 app.use('/', routes);
@@ -102,11 +82,22 @@ app.use('/profile', require('./routes/profile'));
 app.use('/manage-books', require('./routes/manageBooks'));
 
 // Swagger with credentials
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, {
-  swaggerOptions: {
-    withCredentials: true
-  }
-}));
+app.use(
+  '/api-docs', 
+  swaggerUi.serve, 
+  swaggerUi.setup(swaggerDocument, {
+    customJs: '/swagger-auth.js',
+    swaggerOptions: {
+      requestInterceptor: (req) => {
+        const token = getCookie('swagger_token');
+        if (token) {
+          req.headers.Authorization = `Bearer ${token}`;
+        }
+        return req;
+      }
+    }
+  })
+);
 
 app.get('/', (req, res) => {
   res.send('Library Portal API is running')

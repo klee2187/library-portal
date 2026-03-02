@@ -14,12 +14,13 @@ router.get('/google/callback',
     (req, res) => {
 
         const token = generateToken(req.user);
-        res.json({ token });
-    
-        //if (req.user.role === 'employee') {
-        //    return res.redirect('/manage-books');
-        //}
-        //return res.redirect('/dashboard');
+        res.cookie('swagger_token', token, {
+            httpOnly: true,
+            secure: true,
+            sameSite: "none"
+        });
+        
+        res.redirect('/dashboard');
     }
 );
 

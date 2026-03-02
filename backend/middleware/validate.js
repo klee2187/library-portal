@@ -1,5 +1,4 @@
 const { body, validationResult } = require('express-validator');
-const validator = require('../helpers/validate');
 
 // Validation error middleware
 const validate = (req, res, next) => {
