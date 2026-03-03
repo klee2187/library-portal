@@ -16,7 +16,7 @@ router.get('/google/callback',
         console.log("JWT_SECRET exists:", !!process.env.JWT_SECRET);
 
         const token = jwt.sign(
-            { id: req.user._id },
+            { id: req.user.id },
             process.env.JWT_SECRET,
             { expiresIn: '1h'}
         );
