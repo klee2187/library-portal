@@ -15,7 +15,7 @@ const doc = {
   ? ['https']
   : ['http'],
   securityDefinitions: {
-    bearerAuth: {
+    BearerAuth: {
       type: 'apiKey',
       name: 'Authorization',
       in: 'header',
@@ -25,7 +25,7 @@ const doc = {
   },
   security: [
     {
-      bearerAuth: []
+      BearerAuth: []
     }
   ]
 };
