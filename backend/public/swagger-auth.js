@@ -1,6 +1,6 @@
 // Wait for Swagger UI to finish loading
 window.onload = function () {
-    const token = getCookie('swagger-token');
+    const token = getCookie('swagger_token');
     if(token) {
         ui.preauthorizeApiKey('BearerAuth', token)
     }

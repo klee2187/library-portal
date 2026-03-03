@@ -1,6 +1,8 @@
 const router = require('express').Router();
 const passport = require('passport');
+const jwt = require('jsonwebtoken');
 const { generateToken } = require('../config/jwt');
+
 
 
 // Auth with Google
@@ -19,9 +21,9 @@ router.get('/google/callback',
             { expiresIn: '1h'}
         );
 
-        res.cookie('swagger-token', token, {
+        res.cookie('swagger_token', token, {
             httpOnly: false,
-            secure: true,
+            secure: process.env.NODE_ENV === 'production',
             sameSite: "lax",
         });
         
