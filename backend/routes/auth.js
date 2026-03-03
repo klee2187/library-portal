@@ -12,6 +12,9 @@ router.get('/google/callback',
     passport.authenticate('google', { failureRedirect: '/login' }),
     (req, res) => {
 
+        console.log("User in callback:", req.user);
+        console.log("JWT_SECRET exists:", !!process.env.JWT_SECRET);
+
         const token = jwt.sign(
             { id: req.user._id },
             process.env.JWT_SECRET,
@@ -25,8 +28,6 @@ router.get('/google/callback',
         });
         
         res.redirect('/dashboard');
-        console.log("User in callback:", req.user);
-        console.log("JWT_SECRET exists:", !!process.env.JWT_SECRET);
 
     }
 );
