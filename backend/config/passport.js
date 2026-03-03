@@ -21,7 +21,7 @@ module.exports = function (passport) {
             displayName: profile.displayName,
             firstName: profile.name.givenName,
             lastName: profile.name.familyName,
-            email: profile.emails?.[0].value || null,
+            email: profile.emails?.[0]?.value || null,
             image: profile.photos?.[0].value || null,
             role: employeeEmails.includes(profile.emails?.[0].value) ? 'employee' : 'user'
         };
@@ -36,7 +36,8 @@ module.exports = function (passport) {
                 done(null, user)
             }
         } catch (err) {
-            console.error(err)
+            console.error('GOOGLE STRATEGY ERROR', err);
+            return done(err, null);
         }
     }))
 
