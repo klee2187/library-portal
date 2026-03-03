@@ -22,6 +22,12 @@
     }
   },
 
+  "security": [
+    { 
+      "BearerAuth": [] 
+    }
+  ],
+
   "paths": {
     "/users": {
       "get": {
@@ -242,10 +248,5 @@
         }
       }
     }
-  },
-  "security": [
-    { 
-      "BearerAuth": [] 
-    }
-  ]
+  }
 }

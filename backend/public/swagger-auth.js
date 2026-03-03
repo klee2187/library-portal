@@ -1,3 +1,11 @@
+// Wait for Swagger UI to finish loading
+window.onload = function () {
+    const token = getCookie('swagger-token');
+    if(token) {
+        ui.preauthorizeApiKey('BearerAuth', token)
+    }
+};
+
 // Read cookie value
 function getCookie(name) {
     const value = `; ${document.cookie}`;
@@ -5,12 +13,3 @@ function getCookie(name) {
     if (parts.length === 2) return parts.pop().split(';'). shift();
 }
 
-// Wait for Swagger UI to finish loading
-window.onload = function () {
-    const token = getCookie('jwt');
-
-    // If token exists, preauthorize
-    if (token && window.ui) {
-        window.ui.preauthorizeApiKey('BearerAuth', token);
-    }
-};

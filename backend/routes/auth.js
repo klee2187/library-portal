@@ -10,15 +10,19 @@ router.get('/google', passport.authenticate('google', {
 
 // Google auth callback
 router.get('/google/callback', 
-    passport.authenticate('google', { session: false, failureRedirect: '/login' }),
+    passport.authenticate('google', { failureRedirect: '/login' }),
     (req, res) => {
 
-        const token = generateToken(req.user);
-        res.cookie('jwt', token, {
-            httpOnly: true,
+        const token = jwt.sign(
+            { id: req.user._id },
+            process.env.JWT_SECRET,
+            { expiresIn: '1h'}
+        );
+
+        res.cookie('swagger-token', token, {
+            httpOnly: false,
             secure: true,
-            sameSite: "none",
-            path: "/"
+            sameSite: "lax",
         });
         
         res.redirect('/dashboard');
