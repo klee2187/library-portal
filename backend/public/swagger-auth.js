@@ -6,7 +6,7 @@ function getCookie(name) {
 }
 
 // Wait for Swagger UI to finish loading
-windiw.onload = function () {
+window.onload = function () {
     const token = getCookie('jwt');
 
     // If token exists, preauthorize
