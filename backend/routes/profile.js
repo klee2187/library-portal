@@ -4,7 +4,7 @@ const User = require('../models/user');
 
 // View profile
 router.get('/', ensureAuth, (req, res) => {
-    res.render('profile', { user: req.user.toObject() });
+    res.render('profile', { user: req.user });
 });
 
 // Edit profile
@@ -25,16 +25,11 @@ router.post('/edit', ensureAuth, async (req, res) => {
                 address: req.body.address, 
                 age: req.body.age 
             },
-            { returnDocumant: 'after' }
+            { new: true }
         ).lean();
         
         // Refresh session so profile shows updated data
-        req.user.firstName = updatedUser.firstName;
-        req.user.lastName = updatedUser.lastName;
-        req.user.email = updatedUser.email;
-        req.user.phoneNum = updatedUser.phoneNum;
-        req.user.address = updatedUser.address;
-        req.user.age = updatedUser.age;
+        Object.assign(req.user, updatedUser);
         
         res.redirect('/profile'); 
     } 
