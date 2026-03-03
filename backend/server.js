@@ -44,6 +44,7 @@ connectDB();
 app.set('trust proxy', 1);
 
 // Static 
+app.use(express.static(path.join(__dirname, 'public')));
 app.use('/public', express.static(path.join(__dirname, '../frontend/public')));
 
 // Middleware -- parse request bodies
