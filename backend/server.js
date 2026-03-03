@@ -80,12 +80,17 @@ app.use(
 app.use(passport.initialize());
 
 // Routes
-app.use('/', routes);
-app.use('/', require('./routes/index'));
+// Auth FIRST (Google OAuth must not be overridden)
 app.use('/auth', require('./routes/auth'));
+
+// API routes
+app.use('/', require('./routes/index'));
 app.use('/profile', require('./routes/profile'));
 app.use('/manage-books', require('./routes/manageBooks'));
-app.use('/', require('./routes/swagger'));
+
+// Swagger LAST
+app.use('/api-docs', require('./routes/swagger'));
+
 
 
 app.get('/', (req, res) => {
