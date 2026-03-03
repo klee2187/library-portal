@@ -9,7 +9,11 @@ router.get('/google', passport.authenticate('google', {
 
 // Google auth callback
 router.get('/google/callback', 
-    passport.authenticate('google', { failureRedirect: '/login' }),
+    passport.authenticate (
+        'google', { 
+        failureRedirect: '/login' 
+        }
+    ),
     (req, res) => {
 
         console.log("User in callback:", req.user);
