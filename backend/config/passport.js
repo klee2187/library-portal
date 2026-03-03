@@ -22,8 +22,8 @@ module.exports = function (passport) {
             firstName: profile.name.givenName,
             lastName: profile.name.familyName,
             email: profile.emails?.[0]?.value || null,
-            image: profile.photos?.[0].value || null,
-            role: employeeEmails.includes(profile.emails?.[0].value) ? 'employee' : 'user'
+            image: profile.photos?.[0]?.value || null,
+            role: employeeEmails.includes(profile.emails?.[0]?.value) ? 'employee' : 'user'
         };
 
         try {
