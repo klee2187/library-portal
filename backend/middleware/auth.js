@@ -5,12 +5,12 @@ const ensureAuth = (req, res, next) => {
 
   // Swagger
   const authHeader = req.headers.authorization;
-  if (authHeader && authHeader.startsWith('Bearer ')) {
+  if (authHeader?.startsWith('Bearer ')) {
     token = authHeader.split(' ')[1];
   }
 
   // Browser
-  if (!token && req.cookies && req.cookies.jwt) {
+  if (!token && req.cookies?.jwt) {
     token = req.cookies.jwt;
   }
 
@@ -19,28 +19,33 @@ const ensureAuth = (req, res, next) => {
   }
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = decoded;
-    next();
-  } catch (err) {
+    req.user = jwt.verify(token, process.env.JWT_SECRET);
+    return next();
+  } catch {
     return res.redirect('/login');
   }
 };
 
 // Guest-only routes (login page)
 const ensureGuest = (req, res, next) => {
-  if (req.cookies && req.cookies.jwt) {
+  if (req.cookies?.jwt) {
     return res.redirect('/dashboard');
   }
-  next();
+  return next();
 };
 
 // API-only auth check
 const isAuthenticated = (req, res, next) => {
   let token = null;
 
+  // Swagger
   if (req.headers.authorization?.startsWith("Bearer ")) {
     token = req.headers.authorization.split(" ")[1];
+  }
+
+  // Browser API calls
+  if (!token) {
+    return res.status(401).json({ success: false, message: 'Unauthorized' });
   }
 
   if (!token) {
@@ -49,7 +54,7 @@ const isAuthenticated = (req, res, next) => {
 
   try {
     req.user = jwt.verify(token, process.env.JWT_SECRET);
-    next();
+    return next();
   } catch {
     return res.status(401).json({ success: false, message: 'Invalid token' });
   }

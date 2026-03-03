@@ -63,7 +63,7 @@ const addBookToList = async (req, res) => {
 // Remove book from list
 const removeBookFromList = async (req, res) => {
     try {
-        const userId = req.param.userId;
+        const userId = req.params.userId;
         const bookId = req.params.bookId;
 
         if (!mongoose.Types.ObjectId.isValid(userId)) {
@@ -76,7 +76,7 @@ const removeBookFromList = async (req, res) => {
 
         const user = await User.findByIdAndUpdate(
             userId,
-            { $pull: { readinList: bookId } },
+            { $pull: { readingList: bookId } },
             { new: true }
         ).populate('readingList');
 

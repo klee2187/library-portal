@@ -1,10 +1,8 @@
-const { ensureAuth, isAuthenticated } = require('../middleware/auth');
-
-const ensureEmployee = async (req, res, next) => {
-    if (req.isAuthenticated() && req.user.role === 'employee') {
+const ensureEmployee = (req, res, next) => {
+    if (req.user && req.user.role === 'employee') {
         return next();
     }
-    res.redirect('/dashboard');
+    return res.redirect('/dashboard');
 };
 
 module.exports = { ensureEmployee };

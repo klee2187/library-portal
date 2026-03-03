@@ -10,7 +10,7 @@ const validate = (req, res, next) => {
       errors: errors.array()
     });
   }
-  next();;
+  next();
 }
 
 // User validation
@@ -33,7 +33,7 @@ const validateUser = [
     .isLength({ min: 2 })
     .withMessage('First name must be at least 2 characters')
     .matches(/^[a-zA-Z\s.'-]+$/)
-    .withMessage('Author name can only contain letters, spaces, periods, apostrophes, and hyphens'),
+    .withMessage('First name can only contain letters, spaces, periods, apostrophes, and hyphens'),
   
   body('lastName')
     .trim()
@@ -44,7 +44,7 @@ const validateUser = [
     .isLength({ min: 2 })
     .withMessage('Last name must be at least 2 characters')
     .matches(/^[a-zA-Z\s.'-]+$/)
-    .withMessage('Author name can only contain letters, spaces, periods, apostrophes, and hyphens'),
+    .withMessage('Last name can only contain letters, spaces, periods, apostrophes, and hyphens'),
 
   body('age')
     .notEmpty()
@@ -64,7 +64,9 @@ const validateUser = [
   body('phoneNum')
     .trim()
     .notEmpty()
-    .withMessage('Phone number is required'),
+    .withMessage('Phone number is required')
+    .matches(/^\+?[0-9\s\-()]{7,20}$/) 
+    .withMessage('Phone number must be valid'),
 
   body('address')
     .trim()
@@ -120,6 +122,7 @@ const validateBook = [
   body('genre')
     .trim()
     .notEmpty()
+    .matches(/^[a-zA-Z0-9\s.'-]+$/)
     .withMessage('Genre is required'),
 
   body('year')
@@ -132,14 +135,19 @@ const validateBook = [
   body('publishedBy')
     .trim()
     .notEmpty()
+    .matches(/^[a-zA-Z0-9\s.'-]+$/)
     .withMessage('Publisher is required'),
   
   body('ageGroup')
     .trim()
     .notEmpty()
+    .matches(/^[a-zA-Z0-9\s.'-]+$/)
     .withMessage('Age group is required'),
 
-  body('themes')
+  body('themes.*')
+    .trim()
+    .notEmpty()
+    .withMessage('Each theme must be a non-empty string')
     .isArray({ min: 1 })
     .withMessage('Themes must be a non-empty array'),
 
@@ -150,6 +158,7 @@ const validateBook = [
   body('setting')
     .trim()
     .notEmpty()
+    .matches(/^[a-zA-Z0-9\s.'-]+$/)
     .withMessage('Setting is required'),
 
   body('seriesInfo.series')

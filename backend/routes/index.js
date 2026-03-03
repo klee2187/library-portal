@@ -34,7 +34,5 @@ router.get('/dashboard', ensureAuth, async (req, res) => {
 router.use('/books', require('./books')); 
 router.use('/users', require('./users')); 
 router.use('/readingList', require('./readingList'));
-router.use('/', require('./swagger'));
-
 
 module.exports = router;
