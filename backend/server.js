@@ -33,7 +33,8 @@ const hbs = expressHandlebars.create({
 const routes = require('./routes');
 const port = process.env.PORT || 8080;
 const swaggerUi = require('swagger-ui-express');
-const swaggerDocument = require('./swagger.json')
+const swaggerDocument = require('./swagger.json');
+const cookieParser = require('cookie-parser');
 const app = express();
 
 // Connect to MongoDB (Mongoose)
@@ -48,6 +49,9 @@ app.use('/public', express.static(path.join(__dirname, '../frontend/public')));
 // Middleware -- parse request bodies
 app.use (express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Cookie parser
+app.use(cookieParser());
 
 // Logging
 if (process.env.NODE_ENV === 'development') {

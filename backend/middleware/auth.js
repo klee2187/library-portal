@@ -1,36 +1,58 @@
 const jwt = require('jsonwebtoken');
 
 const ensureAuth = (req, res, next) => {
-        const authHeader = req.headers.authorization;
+  let token;
 
-        if (!authHeader || !authHeader.startsWith('Bearer')) {
-            return res.status(401).json({ message: 'Not authorized' });
-        }
+  // Swagger
+  const authHeader = req.headers.authorization;
+  if (authHeader && authHeader.startsWith('Bearer ')) {
+    token = authHeader.split(' ')[1];
+  }
 
-        try {
-            const token = authHeader.split(' ')[1];
-            const decoded = jwt.verify(token, process.env,JWT_SECRET);
+  // Browser
+  if (!token && req.cookies && req.cookies.jwt) {
+    token = req.cookies.jwt;
+  }
 
-            req.user = decoded;
-            next();
-        } catch (err) {
-            return res.status(401).json({ message: 'Invalid token' });
-        }
-    }
-    
+  if (!token) {
+    return res.redirect('/login');
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = decoded;
+    next();
+  } catch (err) {
+    return res.redirect('/login');
+  }
+};
+
+// Guest-only routes (login page)
 const ensureGuest = (req, res, next) => {
-        if(req.isAuthenticated && req.isAuthenticated()) {
-            res.redirect('/dashboard')
-        } else {
-            return next()
-        }
-    }
+  if (req.cookies && req.cookies.jwt) {
+    return res.redirect('/dashboard');
+  }
+  next();
+};
 
+// API-only auth check
 const isAuthenticated = (req, res, next) => {
-    if (req.isAuthenticated && req.isAuthenticated()) {
-        return next();
-    }
-    return res.status(401).json({ success: false, message: 'Unauthorized - please log in' });
-}
+  let token = null;
+
+  if (req.headers.authorization?.startsWith("Bearer ")) {
+    token = req.headers.authorization.split(" ")[1];
+  }
+
+  if (!token) {
+    return res.status(401).json({ success: false, message: 'Unauthorized' });
+  }
+
+  try {
+    req.user = jwt.verify(token, process.env.JWT_SECRET);
+    next();
+  } catch {
+    return res.status(401).json({ success: false, message: 'Invalid token' });
+  }
+};
 
 module.exports = { isAuthenticated, ensureAuth, ensureGuest };

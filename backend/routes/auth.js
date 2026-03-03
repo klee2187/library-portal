@@ -14,10 +14,11 @@ router.get('/google/callback',
     (req, res) => {
 
         const token = generateToken(req.user);
-        res.cookie('swagger_token', token, {
+        res.cookie('jwt', token, {
             httpOnly: true,
             secure: true,
-            sameSite: "none"
+            sameSite: "none",
+            path: "/"
         });
         
         res.redirect('/dashboard');
