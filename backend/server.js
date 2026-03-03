@@ -85,25 +85,6 @@ app.use('/', require('./routes/index'));
 app.use('/auth', require('./routes/auth'));
 app.use('/profile', require('./routes/profile'));
 app.use('/manage-books', require('./routes/manageBooks'));
-
-// Swagger with credentials
-app.use(
-  '/api-docs', 
-  swaggerUi.serve, 
-  swaggerUi.setup(swaggerDocument, {
-    customJs: '/swagger-auth.js',
-    swaggerOptions: {
-      requestInterceptor: (req) => {
-        const token = getCookie('swagger_token');
-        if (token) {
-          req.headers.Authorization = `Bearer ${token}`;
-        }
-        return req;
-      }
-    }
-  })
-);
-
 app.use('/', require('./routes/swagger'));
 
 
