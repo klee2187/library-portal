@@ -29,7 +29,12 @@ router.post('/edit', ensureAuth, async (req, res) => {
         ).lean();
         
         // Refresh session so profile shows updated data
-        Object.assign(req.user, updatedUser);
+        req.user.firstName = updatedUser.firstName; 
+        req.user.lastName = updatedUser.lastName; 
+        req.user.email = updatedUser.email; 
+        req.user.phoneNum = updatedUser.phoneNum; 
+        req.user.address = updatedUser.address; 
+        req.user.age = updatedUser.age;
         
         res.redirect('/profile'); 
     } 
