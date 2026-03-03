@@ -83,13 +83,12 @@ app.use(passport.initialize());
 // Auth FIRST (Google OAuth must not be overridden)
 app.use('/auth', require('./routes/auth'));
 
-// Swagger LAST
-app.use('/api-docs', require('./routes/swagger'));
-
 // API routes
 app.use('/', require('./routes/index'));
 app.use('/profile', require('./routes/profile'));
 app.use('/manage-books', require('./routes/manageBooks'));
+// Swagger LAST
+app.use('/', require('./routes/swagger'));
 
 app.get('/', (req, res) => {
   res.send('Library Portal API is running')
