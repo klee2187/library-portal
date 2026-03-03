@@ -32,9 +32,9 @@ router.get('/google/callback',
 );
 
 // Logout user
-router.get('/logout', (req, res, next) => {
-    res.clearCookie('jwt', { path: '/' });
-        return res.redirect('/login');
+router.get('/logout', (req, res) => {
+    res.clearCookie('swagger_token', { path: '/' });
+    res.redirect('/login');
     });
 
 module.exports = router;
