@@ -25,6 +25,9 @@ router.get('/google/callback',
         });
         
         res.redirect('/dashboard');
+        console.log("User in callback:", req.user);
+        console.log("JWT_SECRET exists:", !!process.env.JWT_SECRET);
+
     }
 );
 
