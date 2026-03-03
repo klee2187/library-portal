@@ -104,6 +104,9 @@ app.use(
   })
 );
 
+app.use('/', require('./routes/swagger'));
+
+
 app.get('/', (req, res) => {
   res.send('Library Portal API is running')
 });
