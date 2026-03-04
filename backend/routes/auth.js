@@ -32,9 +32,15 @@ router.get('/google/callback',
                 httpOnly: true,
                 secure: process.env.NODE_ENV === 'production',
                 sameSite: process.env.NODE_ENV === 'production' ? "none" : "lax",
-        });
+            });
+            
+            res.cookie('swagger_jwt', token, {
+                httpOnly: false,
+                secure: true,
+                sameSite: 'none'
+            });
         
-        res.redirect('/dashboard');
+            res.redirect('/dashboard');
 
         } catch (err) {
             console.error('Google OAuth callback error:', err);

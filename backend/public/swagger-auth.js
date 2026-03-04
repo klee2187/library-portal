@@ -1,7 +1,16 @@
 // Wait for Swagger UI to finish loading
 window.onload = function () {
-    const token = getCookie('swagger_token');
-    if(token) {
+    const swaggerJwt = this.document.cookie
+    .split('; ')
+    .find(row => row.startsWith('swagger_jwt='))
+    ?.split('=')[1];
+
+    // Fallback to swagger_token if non-HttpOnly
+    const swaggerToken = getCookie('swagger_token');
+
+    const token = swaggerJwt || swaggerToken;
+
+    if(token && window.ui) {
         ui.preauthorizeApiKey('BearerAuth', token)
     }
 };
