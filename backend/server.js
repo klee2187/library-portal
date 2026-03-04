@@ -3,7 +3,8 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
-
+const session = require('express-session');
+const MongoDBStore = require('connect-mongodb-session')(session);
 const morgan = require('morgan');
 const expressHandlebars = require('express-handlebars');
 const passport = require('passport');
@@ -76,8 +77,28 @@ app.use(
   })
 );
 
+// MongoDB Store
+const store = new MongoDBStore({
+  uri: process.env.MONGODB_URI,
+  collection: 'sessions'
+});
+
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    store: store,
+    cookie: {
+      secure: process.env.NODE_ENV ==='production',
+      sameSite: 'lax'
+    }
+  })
+);
+
 //Passport middleware
 app.use(passport.initialize());
+app.use(passport.session());
 
 // Routes
 // Auth FIRST (Google OAuth must not be overridden)
