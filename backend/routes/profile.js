@@ -30,19 +30,26 @@ router.post('/edit', ensureAuth, async (req, res) => {
 
         const newToken = jwt.sign(
             {
-                _id: updateUser._id,
+                _id: updatedUser._id,
                 role: updatedUser.role,
                 firstName: updatedUser.firstName,
                 lastName:updatedUser.lastName,
-                email: updatedUser.email
+                email: updatedUser.email,
+                phoneNum: updatedUser.phoneNum,
+                address: updatedUser.address,
+                age: updatedUser.age,
+                image: updatedUser.image
             },
             process.env.JWT_SECRET,
             { expiresIn: '1h' }
         );
-        
-        // Refresh session so profile shows updated data
-       Object.assign(req.user, updatedUser);
-        
+
+        // Replace cookie
+        res.cookie('swagger_token', newToken, {
+            httpOnly: true,
+            secure: true,
+            sameSite: 'none'
+        })
         res.redirect('/profile'); 
     } 
     catch (err) { 
