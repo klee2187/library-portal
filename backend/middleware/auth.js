@@ -10,8 +10,8 @@ const ensureAuth = (req, res, next) => {
   }
 
   // Browser
-  if (!token && req.cookies?.jwt) {
-    token = req.cookies.jwt;
+  if (!token && req.cookies?.swagger_token) {
+    token = req.cookies.swagger_token;
   }
 
   if (!token) {
@@ -28,7 +28,7 @@ const ensureAuth = (req, res, next) => {
 
 // Guest-only routes (login page)
 const ensureGuest = (req, res, next) => {
-  if (req.cookies?.jwt) {
+  if (req.cookies?.swagger_token) {
     return res.redirect('/dashboard');
   }
   return next();
@@ -44,8 +44,8 @@ const isAuthenticated = (req, res, next) => {
   }
 
   // Browser API calls
-  if (!token) {
-    return res.status(401).json({ success: false, message: 'Unauthorized' });
+  if (!token && req.cookies?.swagger_token) {
+    token = req.cookies.swagger_token;
   }
 
   if (!token) {
