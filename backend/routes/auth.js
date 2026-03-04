@@ -37,7 +37,8 @@ router.get('/google/callback',
             res.cookie('swagger_jwt', token, {
                 httpOnly: false,
                 secure: true,
-                sameSite: 'none'
+                sameSite: 'none',
+                path: '/'
             });
         
             res.redirect('/dashboard');
