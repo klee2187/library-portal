@@ -26,9 +26,9 @@ router.get('/google/callback',
             );
 
             res.cookie('swagger_token', token, {
-            httpOnly: false,
-            secure: process.env.NODE_ENV === 'production',
-            sameSite: "lax",
+            httpOnly: true,
+            secure: true,
+            sameSite: "none",
         });
         
         res.redirect('/dashboard');
