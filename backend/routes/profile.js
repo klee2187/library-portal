@@ -27,6 +27,18 @@ router.post('/edit', ensureAuth, async (req, res) => {
             },
             { new: true }
         ).lean();
+
+        const newToken = jwt.sign(
+            {
+                _id: updateUser._id,
+                role: updatedUser.role,
+                firstName: updatedUser.firstName,
+                lastName:updatedUser.lastName,
+                email: updatedUser.email
+            },
+            process.env.JWT_SECRET,
+            { expiresIn: '1h' }
+        );
         
         // Refresh session so profile shows updated data
        Object.assign(req.user, updatedUser);
