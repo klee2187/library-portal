@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { ensureAuth } = require('../middleware/auth');
 const User = require('../models/user');
+const jwt = require('jsonwebtoken');
 
 // View profile
 router.get('/', ensureAuth, (req, res) => {
