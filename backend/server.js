@@ -106,6 +106,8 @@ app.use('/auth', require('./routes/auth'));
 
 // API routes
 app.use('/', require('./routes/index'));
+app.use('/api/books', require('./routes/api/books'));
+app.use('/books', require('./routes/books'));
 app.use('/profile', require('./routes/profile'));
 app.use('/manage-books', require('./routes/manageBooks'));
 // Swagger LAST

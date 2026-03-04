@@ -1,45 +1,17 @@
-const express = require('express');
-const router = express.Router();
-
+const router = require('express').Router();
 const Book = require('../models/book');
 const ReadingList = require('../models/readingList');
+const { ensureAuth } = require('../middleware/auth');
 
-const booksController = require('../controllers/books.js');
-const validation = require('../middleware/validate');
-const { ensureAuth, isAuthenticated } = require('../middleware/auth');
-const { isEmployee } = require('../middleware/authorize');
-
-// Public routes
-router.get('/', ensureAuth, booksController.getAll);
-router.get('/:id', ensureAuth, booksController.getSingle);
-
-// Employee-only routes
-router.post('/', isAuthenticated, isEmployee, validation.validateBook, booksController.addBook);
-router.put('/:id', isAuthenticated, isEmployee, validation.validateBook, booksController.updateBook);
-router.delete('/:id', isAuthenticated, isEmployee, booksController.deleteBook);
-
-// Single book      GET /
-router.put('/:id', ensureAuth, booksController.updateBook);
-router.delete('/:id', ensureAuth, booksController.deleteBook);
+// Render book details page
 router.get('/:id', ensureAuth, async (req, res) => {
-    try{
-        const book = await Book.findById(req.params.id).lean();
+    const book = await Book.findById(req.params.id).lean();
+    const inList = await ReadingList.findOne({
+        userId: req.user._id,
+        bookId: req.params.id
+    }).lean();
 
-        if (!book) {
-            return res.status(404).send('Book not found');
-        }
-
-        // Check if book is already on list
-        const inList = await ReadingList.findOne({
-            userId: req.user._id,
-            bookId: req.params.id
-        }).lean();
-
-    res.render('bookDetails',{ book, inList });
-    } catch (err) {
-        console.error(err);
-        res.status(500).send('Server Error')
-    }
+    res.render('bookDetails', { book, inList });
 });
 
-module.exports = router; 
+module.exports = router;
