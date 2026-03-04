@@ -109,7 +109,7 @@ app.use('/', require('./routes/index'));
 app.use('/profile', require('./routes/profile'));
 app.use('/manage-books', require('./routes/manageBooks'));
 // Swagger LAST
-app.use('/', require('./routes/swagger'));
+app.use('/api-docs', require('./routes/swagger'));
 
 app.get('/', (req, res) => {
   res.send('Library Portal API is running')
