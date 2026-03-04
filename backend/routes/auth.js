@@ -9,23 +9,23 @@ router.get('/google', passport.authenticate('google', {
 
 // Google auth callback
 router.get('/google/callback', 
-    passport.authenticate (
-        'google', { 
-        failureRedirect: '/login' 
-        }
-    ),
-    (req, res) => {
+    passport.authenticate ('google', { failureRedirect: '/login' }),
+    async (req, res) => {
+        try {
+            console.log("User in callback:", req.user);
+            console.log("JWT_SECRET exists:", !!process.env.JWT_SECRET);
 
-        console.log("User in callback:", req.user);
-        console.log("JWT_SECRET exists:", !!process.env.JWT_SECRET);
+            if(!req.user) {
+                throw new Error('Paasport did not provide req.user');
+            }
 
-        const token = jwt.sign(
-            { id: req.user.id },
-            process.env.JWT_SECRET,
-            { expiresIn: '1h'}
-        );
+            const token = jwt.sign(
+                { id: req.user.id },
+                process.env.JWT_SECRET,
+                { expiresIn: '1h'}
+            );
 
-        res.cookie('swagger_token', token, {
+            res.cookie('swagger_token', token, {
             httpOnly: false,
             secure: process.env.NODE_ENV === 'production',
             sameSite: "lax",
@@ -33,6 +33,10 @@ router.get('/google/callback',
         
         res.redirect('/dashboard');
 
+        } catch (err) {
+            console.error('Google OAuth callback error:', err);
+            res.status(500).send('OAuth callback failed');
+        }
     }
 );
 
