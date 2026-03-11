@@ -14,4 +14,13 @@ router.get('/:id', ensureAuth, async (req, res) => {
     res.render('bookDetails', { book, inList });
 });
 
+
+
+// Render book details page
+router.get('/', async (req, res) => {
+    const book = await Book.find().lean();
+
+    res.send(book);
+});
+
 module.exports = router;
